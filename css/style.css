@@ -1,0 +1,17 @@
+/* Design modale de login*/
+#login_modal{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+    border: none;
+}
+
+/*Choix de la couleur du backdrop de la modal*/
+#login_modal::backdrop{
+    background: rgb(81, 211, 194); 
+}
+#error_message{
+    color : red;
+    font-weight: bold;
+}
