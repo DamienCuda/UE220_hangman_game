@@ -11,6 +11,7 @@
 #login_modal::backdrop{
     background: rgb(81, 211, 194); 
 }
+/*Message d'erreur si pas de pseudo*/
 #error_message{
     color : red;
     font-weight: bold;
