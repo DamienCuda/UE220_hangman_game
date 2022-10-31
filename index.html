@@ -13,41 +13,44 @@
 
     </header>
     <main id= "main_wrapper">
-        <dialog open id="login_modal">
+        <dialog id="login_modal">
             <img src="/assets/hangman_picture.png" alt="Logo du jeu pendu">
             <div id="pseudo_input_wrapper">
-                <input type="text" name="pseudo_input">
                 <label for="pseudo_input">Entrez votre pseudo</label>
+                <input id="pseudo_input" type="text" name="pseudo_input">
+                <p id="error_message" class="text-center mt-3"></p>
             </div>
             <fieldset id="level_choice_wrapper">
-                <legend>Sélectionné un niveau de difficulté</legend>
+                <legend>Sélectionner un niveau de difficulté</legend>
                 <div>
-                  <input type="radio" id="facile" name="level_choice" value="facile"
-                         checked>
-                  <label for="Facile">Facile : Mot de 5 lettres</label>
+                    <input type="radio" id="facile" name="level_choice" value="1" checked>
+                    <label for="Facile">Facile : Mot de 5 lettres</label>
                 </div>
             
                 <div>
-                  <input type="radio" id="normal" name="level_choice" value="normal">
+                  <input type="radio" id="normal" name="level_choice" value="2">
                   <label for="normal">Normal : Mot de 7 lettres</label>
                 </div>
             
                 <div>
-                  <input type="radio" id="difficile" name="level_choice" value="difficile">
+                  <input type="radio" id="difficile" name="level_choice" value="3">
                   <label for="difficile">Difficile : Mot de 10 lettres</label>
                 </div>
             </fieldset>
-            <button id="start_btn">Start</button>
+            <a href ="#"id="start_btn" class="btn btn-primary" rel="modal:close">Start</a>
         </dialog>
 
     </main>
-    <footer>
-        <p id="footer_text" class="text-center">
+    <footer class="container text-center">
+        <div class="row">
+        <p id="footer_text" class="col-12">
             Groupe 2
             <br>
             Bryan Gast - Julien Biechler - Josue Denis Caman - Damien Cuda
         </p>
+    </div>
     </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>
