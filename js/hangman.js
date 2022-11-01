@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", function(){
     function init(){
         /*
             Pour afficher un partie du pendu, il suffit d'appeler la fonction de la partie souhaiter.
-            Note: Gibbet signifie potence en glais.
+            Note: Gibbet signifie potence en anglais.
          */
 
         gibbet();
