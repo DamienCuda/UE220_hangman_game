@@ -101,8 +101,8 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetTraverse.strokeStyle = black;
         gibbetTraverse.lineWidth = 3;
         gibbetTraverse.beginPath();
-        gibbetTraverse.moveTo(60,60);
-        gibbetTraverse.lineTo(150,60);
+        gibbetTraverse.moveTo(58,60);
+        gibbetTraverse.lineTo(152,60);
         gibbetTraverse.stroke();
 
         gibbetVertical = hangman.getContext("2d");
