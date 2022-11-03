@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", function(){
 
     const modal = document.querySelector('#login_modal'); //Initialisation de variable en vanillaJS pour utiliser la méthode showModal()
-    modal.showModal(); //La modal apparait dès le lenacement du jeu
-
-    $(start_btn).click(start_game)
-
-    generate_keyboard(); //Le clavier est généré
-
-    
     const pseudo_input = $('#pseudo_input');
     const dificulty_level = $('#level_choice_wrapper input');
     const start_btn = $('#start_btn');
     const error_message = $('#error_message');
     var difficulty = 0;
+
+
+    modal.showModal(); //La modal apparait dès le lenacement du jeu
+
+    generate_keyboard(); //Le clavier est généré
+
+    $(start_btn).click(start_game)
 
     //Fonction de vérification du pseudo et verification du niveau de difficulté
     function start_game(){
