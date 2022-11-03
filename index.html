@@ -9,8 +9,8 @@
     <title>Hangman</title>
 </head>
 <body class="container">
-    <!-- <header>
-        <dialog id="login_modal">
+    <header>
+        <dialog id="login_modal" class="mx-auto my-auto">
             <img src="/assets/hangman_picture.png" alt="Logo du jeu pendu">
             <div id="pseudo_input_wrapper">
                 <label for="pseudo_input">Entrez votre pseudo</label>
@@ -36,7 +36,7 @@
             </fieldset>
             <a href ="#"id="start_btn" class="btn btn-primary" rel="modal:close">Start</a>
         </dialog>
-    </header> -->
+    </header>
     <main id= "main_wrapper" class="row">
         <aside id="score_container" class="col-3">
             <div id="Scoreboard_container">
@@ -44,7 +44,7 @@
             </div>
         </aside>
 
-        <div id="game_container" class="col-9">
+        <div id="game_container" class="col-9 pb-4">
             <div class="row">
                 <div id="mystery_word_container" class="col-12" style="height: 50vh"> <!--Style to be removed once content in upper row -->
                     <!-- Mystery word here -->
@@ -52,8 +52,7 @@
             </div>
             <div  class="row">
                 <div id="keyboard_container" class="col-12 d-flex flex-wrap justify-content-center">
-                    <span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span><span class="letter">A</span>
-                    <!-- Keyboard word here -->
+                    <!-- Keyboard will be generated here !!-->
                 </div>
             </div>
         </div>
