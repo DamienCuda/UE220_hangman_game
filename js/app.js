@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const modal = document.querySelector('#login_modal'); //Initialisation de variable en vanillaJS pour utiliser la méthode showModal()
     modal.showModal(); //La modal apparait dès le lenacement du jeu
+    
+    generate_keyboard();
 
     const pseudo_input = $('#pseudo_input');
     const dificulty_level = $('#level_choice_wrapper input');
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     $(start_btn).click(start_game)
 
-    //Fonction de vérifiacation du pseudo et verification du niveau de difficulté
+    //Fonction de vérification du pseudo et verification du niveau de difficulté
     function start_game(){
         var player_pseudo = $(pseudo_input).val(); //récupération pseudo
         if (player_pseudo == ""){
@@ -26,4 +28,12 @@ document.addEventListener("DOMContentLoaded", function(){
             modal.style.display = "none"; //La modale est caché
         }
     }
+
+    //Fonction de génération du clavier
+    function generate_keyboard(){
+        for( var i = 65; i <= 90; i++){
+           var letter = String.fromCharCode(i);
+           $("#keyboard_container").append(`<span class="letter">${letter}</span>`);
+        };
+    };
 });
