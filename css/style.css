@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 /* Design modale de login*/
 #login_modal{
     display: flex;
@@ -15,4 +20,19 @@
 #error_message{
     color : red;
     font-weight: bold;
+}
+.letter{
+    color: black;
+    padding: 1.5rem;
+    background-color: rgb(235, 231, 231);
+    margin: 1rem;
+    border-radius: 15px;
+    font-size: 22px;
+    font-weight: 500;
+    box-shadow: 0px 5px 15px 3px rgba(120,120,120,0.50);
+}
+.letter:hover{
+    color: white;
+    background-color: rgba(157, 162, 206, 0.815);
+    scale: 1.1;
 }
