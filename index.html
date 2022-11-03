@@ -8,11 +8,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Hangman</title>
 </head>
-<body>
-    <header>
-
-    </header>
-    <main id= "main_wrapper">
+<body class="container">
+    <!-- <header>
         <dialog id="login_modal">
             <img src="/assets/hangman_picture.png" alt="Logo du jeu pendu">
             <div id="pseudo_input_wrapper">
@@ -39,16 +36,33 @@
             </fieldset>
             <a href ="#"id="start_btn" class="btn btn-primary" rel="modal:close">Start</a>
         </dialog>
+    </header> -->
+    <main id= "main_wrapper" class="row">
+        <aside id="score_container" class="col-3">
+            <div id="Scoreboard_container">
+                <!-- Scoreboard here -->
+            </div>
+        </aside>
 
+        <div id="game_container" class="col-9">
+            <div class="row">
+                <div id="mystery_word_container" class="col-12" style="height: 50vh"> <!--Style to be removed once content in upper row -->
+                    <!-- Mystery word here -->
+                </div>
+            </div>
+            <div  class="row">
+                <div id="keyboard_container" class="col-12 d-flex flex-wrap justify-content-center">
+                    <!-- Keyboard word here -->
+                </div>
+            </div>
+        </div>
     </main>
-    <footer class="container text-center">
-        <div class="row">
+    <footer class="row text-center">
         <p id="footer_text" class="col-12">
             Groupe 2
             <br>
             Bryan Gast - Julien Biechler - Josue Denis Caman - Damien Cuda
         </p>
-    </div>
     </footer>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/app.js"></script>
