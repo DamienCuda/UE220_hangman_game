@@ -8,22 +8,29 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Hangman</title>
 </head>
-<body class="container">
-    <header>
-        <dialog id="login_modal" class="mx-auto my-auto">
-            <img src="/assets/hangman_picture.png" alt="Logo du jeu pendu">
+<body class="container d-flex flex-column mx-0">
+    <main id= "main_wrapper" class="row m-5">
+        <aside id="game_rules" class="col-2 ps-4 pt-4">
+            <div id="game_rules">
+                <h1 class="h3">Règles du jeu</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, explicabo illo cum omnis architecto illum animi dolore repellendus tempora suscipit?</p>
+            </div>
+        </aside>
+        <section id="login" class=" col-10 text-center">
+            <img class="mb-3" src="/assets/hangman_picture.png" alt="Logo du jeu pendu">
             <div id="pseudo_input_wrapper">
                 <label for="pseudo_input">Entrez votre pseudo</label>
                 <input id="pseudo_input" type="text" name="pseudo_input">
                 <p id="error_message" class="text-center mt-3"></p>
             </div>
-            <fieldset id="level_choice_wrapper">
-                <legend>Sélectionner un niveau de difficulté</legend>
+            <fieldset id="level_choice_wrapper" class="my-5">
+                <legend>
+                    Sélectionner un niveau de difficulté
+                </legend>
                 <div>
                     <input type="radio" id="facile" name="level_choice" value="1" checked>
                     <label for="Facile">Facile : Mot de 5 lettres</label>
                 </div>
-            
                 <div>
                   <input type="radio" id="normal" name="level_choice" value="2">
                   <label for="normal">Normal : Mot de 7 lettres</label>
@@ -34,31 +41,11 @@
                   <label for="difficile">Difficile : Mot de 10 lettres</label>
                 </div>
             </fieldset>
-            <a href ="#"id="start_btn" class="btn btn-primary" rel="modal:close">Start</a>
-        </dialog>
-    </header>
-    <main id= "main_wrapper" class="row">
-        <aside id="score_container" class="col-3">
-            <div id="Scoreboard_container">
-                <!-- Scoreboard here -->
-            </div>
-        </aside>
-
-        <div id="game_container" class="col-9 pb-4">
-            <div class="row">
-                <div id="mystery_word_container" class="col-12" style="height: 50vh"> <!--Style to be removed once content in upper row -->
-                    <!-- Mystery word here -->
-                </div>
-            </div>
-            <div  class="row">
-                <div id="keyboard_container" class="col-12 d-flex flex-wrap justify-content-center">
-                    <!-- Keyboard will be generated here !!-->
-                </div>
-            </div>
-        </div>
+            <a href ="game.html"id="start_btn" class="btn btn-primary" >Start</a>
+        </section>
     </main>
-    <footer class="row text-center">
-        <p id="footer_text" class="col-12">
+    <footer class="row text-center bg-light p-3 fixed-bottom">
+        <p class="col-12">
             Groupe 2
             <br>
             Bryan Gast - Julien Biechler - Josue Denis Caman - Damien Cuda
