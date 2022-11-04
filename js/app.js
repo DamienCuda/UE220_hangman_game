@@ -7,17 +7,15 @@ document.addEventListener("DOMContentLoaded", function(){
     const error_message = $('#error_message');
     var difficulty = 0;
 
-
-    modal.showModal(); //La modal apparait dès le lenacement du jeu
-
     generate_keyboard(); //Le clavier est généré
 
     $(start_btn).click(start_game)
 
     //Fonction de vérification du pseudo et verification du niveau de difficulté
-    function start_game(){
+    function start_game(e){
         var player_pseudo = $(pseudo_input).val(); //récupération pseudo
         if (player_pseudo == ""){
+            e.preventDefault();
             $(error_message).html('Vous devez entrer votre pseudo pour jouer ;)') //Affichage message d'erreur si pas de pseudo choisit
             
         }else{
