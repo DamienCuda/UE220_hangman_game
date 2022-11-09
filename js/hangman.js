@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", function(){
     var hangman = document.getElementById("hangman");
-    var black = "rgb(0,0,0)";
+    var white = "rgb(255,255,255)";
 
     init();
 
@@ -22,8 +22,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function headHangman(){
         headHangman = hangman.getContext("2d");
-        headHangman.fillStyle = black;
-        headHangman.strokeStyle = black;
+        headHangman.fillStyle = white;
+        headHangman.strokeStyle = white;
         headHangman.lineWidth = 3;
         headHangman.beginPath();
         headHangman.arc(150, 100, 20, 0, 2 * Math.PI, false);
@@ -33,8 +33,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function bodyHangman(){
         bodyHangman = hangman.getContext("2d");
-        bodyHangman.fillStyle = black;
-        bodyHangman.strokeStyle = black;
+        bodyHangman.fillStyle = white;
+        bodyHangman.strokeStyle = white;
         bodyHangman.beginPath();
         bodyHangman.lineWidth = 3;
         bodyHangman.moveTo(150,120);
@@ -44,8 +44,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function armRightHangman(){
         armRightHangman = hangman.getContext("2d");
-        armRightHangman.fillStyle = black;
-        armRightHangman.strokeStyle = black;
+        armRightHangman.fillStyle = white;
+        armRightHangman.strokeStyle = white;
         armRightHangman.lineWidth = 3;
         armRightHangman.beginPath();
         armRightHangman.moveTo(180,160);
@@ -55,8 +55,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function armLeftHangman(){
         armLeftHangman = hangman.getContext("2d");
-        armLeftHangman.fillStyle = black;
-        armLeftHangman.strokeStyle = black;
+        armLeftHangman.fillStyle = white;
+        armLeftHangman.strokeStyle = white;
         armLeftHangman.lineWidth = 3;
         armLeftHangman.beginPath();
         armLeftHangman.moveTo(120,160);
@@ -66,8 +66,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function legRightHangman(){
         legRightHangman = hangman.getContext("2d");
-        legRightHangman.fillStyle = black;
-        legRightHangman.strokeStyle = black;
+        legRightHangman.fillStyle = white;
+        legRightHangman.strokeStyle = white;
         legRightHangman.lineWidth = 3;
         legRightHangman.beginPath();
         legRightHangman.moveTo(180,230);
@@ -77,8 +77,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function legLeftHangman(){
         legLeftHangman = hangman.getContext("2d");
-        legLeftHangman.fillStyle = black;
-        legLeftHangman.strokeStyle = black;
+        legLeftHangman.fillStyle = white;
+        legLeftHangman.strokeStyle = white;
         legLeftHangman.lineWidth = 3;
         legLeftHangman.beginPath();
         legLeftHangman.moveTo(120,230);
@@ -88,8 +88,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function gibbet(){
         gibbetHead = hangman.getContext("2d");
-        gibbetHead.fillStyle = black;
-        gibbetHead.strokeStyle = black;
+        gibbetHead.fillStyle = white;
+        gibbetHead.strokeStyle = white;
         gibbetHead.lineWidth = 3;
         gibbetHead.beginPath();
         gibbetHead.moveTo(150,60);
@@ -97,8 +97,8 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetHead.stroke();
 
         gibbetTraverse = hangman.getContext("2d");
-        gibbetTraverse.fillStyle = black;
-        gibbetTraverse.strokeStyle = black;
+        gibbetTraverse.fillStyle = white;
+        gibbetTraverse.strokeStyle = white;
         gibbetTraverse.lineWidth = 3;
         gibbetTraverse.beginPath();
         gibbetTraverse.moveTo(58,60);
@@ -106,8 +106,8 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetTraverse.stroke();
 
         gibbetVertical = hangman.getContext("2d");
-        gibbetVertical.fillStyle = black;
-        gibbetVertical.strokeStyle = black;
+        gibbetVertical.fillStyle = white;
+        gibbetVertical.strokeStyle = white;
         gibbetVertical.lineWidth = 3;
         gibbetVertical.beginPath();
         gibbetVertical.moveTo(60,60);
@@ -115,8 +115,8 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetVertical.stroke();
 
         gibbetSocle = hangman.getContext("2d");
-        gibbetSocle.fillStyle = black;
-        gibbetSocle.strokeStyle = black;
+        gibbetSocle.fillStyle = white;
+        gibbetSocle.strokeStyle = white;
         gibbetSocle.lineWidth = 3;
         gibbetSocle.beginPath();
         gibbetSocle.moveTo(120,398);
