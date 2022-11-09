@@ -1,0 +1,11 @@
+/*Message d'erreur si pas de pseudo*/
+#error_message{
+    padding-top: 2rem;
+    color : red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#footer{
+    min-width: 98vw;
+}

@@ -4,12 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>Hangman</title>
 </head>
-<body>
-    <canvas id="hangman" width="300" height="400">Message affiché pour les navigateurs ne supportant pas cette balise.</canvas>
-    <script src="js/app.js"></script>
-    <script src="js/hangman.js"></script>
+<body class="d-flex flex-column min-vh-100">
+
+    <div class="container d-flex flex-column py-5">
+        <main id= "main_wrapper" class="row m-4">
+            <aside id="game_rules" class="col-3 ps-4 pt-4">
+                <h1 class="h3 frederica_font">Règles du jeu</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, explicabo illo cum omnis architecto illum animi dolore repellendus tempora suscipit?</p>
+            </aside>
+
+            <section id="login" class=" col-9 text-center">
+                <img class="mb-3" src="/assets/hangman_picture.png" alt="Logo du jeu pendu">
+                <div id="pseudo_input_wrapper">
+                    <label for="pseudo_input">Entrez votre pseudo</label>
+                    <input id="pseudo_input" type="text" name="pseudo_input">
+                    <p id="error_message" class="text-center mt-3"></p>
+                </div>
+                <fieldset id="level_choice_wrapper" class="my-5">
+                    <legend class="frederica_font">
+                        Sélectionner un niveau de difficulté
+                    </legend>
+                    <div>
+                        <input type="radio" id="facile" name="level_choice" value="Facile" checked>
+                        <label for="facile">Facile : Mot de 5 lettres</label>
+                    </div>
+                    <div>
+                    <input type="radio" id="normal" name="level_choice" value="Normal">
+                    <label for="normal">Normal : Mot de 7 lettres</label>
+                    </div>
+                
+                    <div>
+                    <input type="radio" id="difficile" name="level_choice" value="Difficile">
+                    <label for="difficile">Difficile : Mot de 10 lettres</label>
+                    </div>
+                </fieldset>
+                <a href="game.html" id="start_btn" class="btn btn-primary" >Start</a>
+            </section>
+        </main>
+    </div>
+    
+    <div id="footer" class="footer container mt-auto">
+        <footer class="row text-center bg-light p-3">
+            <p class="col-12">
+                Groupe 2
+                <br>
+                Bryan Gast - Julien Biechler - Josue Denis Caman - Damien Cuda
+            </p>
+        </footer>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/game.js"></script>
+
 </body>
 </html>

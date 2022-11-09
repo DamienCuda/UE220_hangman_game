@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.frederica_font{
+    font-family: "Fredericka the Great", sans-serif;
+    font-weight: 500
+};

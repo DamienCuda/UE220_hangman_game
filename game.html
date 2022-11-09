@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/game.css">
+    <title>Hangman</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header class="container">
+        <div class="row text-center py-4">
+            <h1 class="h1 col-12 frederica_font">Hangman</h1>
+        </div>
+    </header>
+    <div class="container">
+        <main id= "main_wrapper" class="row">
+            <aside id="score_container" class="col-2 pt-4">
+                <div id="current_game_infos">
+                    <h2 class="h4 frederica_font">Joueur :</h2>
+                    <p id="player_pseudo"> </p>
+                    <h3 class="h4 frederica_font">Niveau de difficulté :</h3>
+                    <p id="current_difficulty"></p>
+                </div>
+                <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum amet quo officia odit repudiandae quam tenetur quasi, non fugiat, dignissimos nesciunt earum ad adipisci maxime, dicta vero mollitia labore doloribus! Optio rerum possimus aut, totam eum reiciendis omnis aliquid unde, facilis consectetur itaque quod modi. Eos alias nobis velit ex.</div>
+                <!-- Scoreboard here -->
+            </aside>
+            <section id="game_container" class="col-10 pb-4">
+                <div class="container">
+                    <div id="game_top" class="row h-75">
+                        <div id="canvas_container" class="col-6 p-4 text-center">
+                            <canvas id="hangman_canvas">
+                                <!-- Canvas here -->
+                            </canvas>
+                        </div>
+                        <div id="mystery_word_container" class="col-6 p-4 d-flex justify-content-center align-items-center gap-4">
+                            <!-- Mystery word here -->
+                        </div>
+                    </div>
+                    <div id="game_bottom" class="row h-25">
+                        <div id="keyboard_container" class="col-12 p-4 d-flex flex-wrap justify-content-center align-items-center">
+                            <!-- Keyboard will be generated here !!-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div id="footer" class="footer container mt-auto">
+        <footer class="row text-center bg-light p-3">
+            <p class="col-12">
+                Groupe 2
+                <br>
+                Bryan Gast - Julien Biechler - Josue Denis Caman - Damien Cuda
+            </p>
+        </footer>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/game.js"></script>
+</body>
+</html>
