@@ -34,6 +34,7 @@ $(document).ready(function(){
     var letters = $('.letter');
     $(letters).each(function(key, value){
         $(value).click(function(){
+            choosen_letter = value.innerHTML;
             show_letters(0, choosen_letter);
         })
     });
