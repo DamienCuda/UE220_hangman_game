@@ -9,18 +9,13 @@ window.addEventListener("DOMContentLoaded", function(){
             Pour afficher un partie du pendu, il suffit d'appeler la fonction de la partie souhaiter.
             Note: Gibbet signifie potence en anglais.
          */
-
-        gibbet();
-        headHangman();
-        bodyHangman();
-        armRightHangman();
-        armLeftHangman();
-        legRightHangman();
+        
         legLeftHangman();
 
     }
 
     function headHangman(){
+        gibbet();
         headHangman = hangman.getContext("2d");
         headHangman.fillStyle = white;
         headHangman.strokeStyle = white;
@@ -32,6 +27,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
     function bodyHangman(){
+        headHangman();
         bodyHangman = hangman.getContext("2d");
         bodyHangman.fillStyle = white;
         bodyHangman.strokeStyle = white;
@@ -43,6 +39,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
     function armRightHangman(){
+        bodyHangman();
         armRightHangman = hangman.getContext("2d");
         armRightHangman.fillStyle = white;
         armRightHangman.strokeStyle = white;
@@ -54,6 +51,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
     function armLeftHangman(){
+        armRightHangman();
         armLeftHangman = hangman.getContext("2d");
         armLeftHangman.fillStyle = white;
         armLeftHangman.strokeStyle = white;
@@ -65,6 +63,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
     function legRightHangman(){
+        armLeftHangman();
         legRightHangman = hangman.getContext("2d");
         legRightHangman.fillStyle = white;
         legRightHangman.strokeStyle = white;
@@ -76,6 +75,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
     function legLeftHangman(){
+        legRightHangman();
         legLeftHangman = hangman.getContext("2d");
         legLeftHangman.fillStyle = white;
         legLeftHangman.strokeStyle = white;
