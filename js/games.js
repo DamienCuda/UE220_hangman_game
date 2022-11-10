@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     /***********LES VARIABLES*********/
 
-    var mystery_word = "banane"; // Mot à découvrir
+    var mystery_word = "test"; // Mot à découvrir
     var choosen_letter = ""; // Lettre choisit par le joueur au click ou au clavier
     var player_pseudo = sessionStorage.getItem('pseudo'); //Récupération du pseudo de session
     var dificulty_level = sessionStorage.getItem('level'); //Récupération du niveau de session
@@ -15,39 +15,22 @@ $(document).ready(function(){
     $("#player_pseudo").html(player_pseudo);            //Injection du pseudo
 
     generate_keyboard();                                //Le clavier est généré
-    //choix aléatoire du mot à injecter dans la variable mystery_word
+                                                        //choix aléatoire du mot à injecter dans la variable mystery_word
     hidden_word(mystery_word);                          //Les tirets représentant le mot mystère sont générés en fonction de la longueur
  
-    while(error_counter < 7){
-        //Écoute du clavier virtuel
-        var letters = $('.letter');
-        $(letters).each(function(key, value){
-            $(value).click(function(){
-                choosen_letter = value.innerHTML;
-                // fonction verif(choosen_letter)
-            })
-        });
-    };
     
-
-    // if error_counter == 7 Fonction GAME OVER
-
-    //FONCTION SCORE
+    /***********ÉVENEMENTS*********/
     
-    //FONCTION RESTART
-    
+    //Écoute du clavier virtuel
+    var letters = $('.letter');
+    $(letters).each(function(key, value){
+        $(value).click(function(){
+            choosen_letter = value.innerHTML;
+            // fonction verif(choosen_letter)
+        })
+    });
     
     /***********LES FONCTIONS*********/
-
-    //fonction verif(choosen_letter)
-        //si lettre dans le mot 
-            // fonction affichage
-                //si tableau_temp == mystery_word
-                //fonction WIN
-                //break
-        //sinon error_counter ++
-        //fonction afffichage canvas
-    
 
     //Fonction de génération du mot mystère caché
     function hidden_word(word){
@@ -72,3 +55,25 @@ $(document).keydown(function(event){
         // fonction verif(choosen_letter)
     }
 });
+
+
+/*
+while(error_counter < 7){
+
+};
+    
+if error_counter == 7 Fonction GAME OVER
+
+FONCTION SCORE
+
+FONCTION RESTART
+
+FONCTION verif(choosen_letter)
+    si lettre dans le mot 
+        fonction affichage
+            si tableau_temp == mystery_word
+            fonction WIN
+            break
+    sinon error_counter ++
+    fonction afffichage canvas
+*/

@@ -1,7 +1,7 @@
  /* Canvas */
-#hangman_canvas{
-    width: 300px;
-    height: 400px;
+#hangman{
+    width: 400px;
+    height: 300px;
     background-image: url(/assets/jason-dent-itA0ybdIDTs-unsplash.jpg);
     background-size: cover;                      
     background-repeat: no-repeat;
