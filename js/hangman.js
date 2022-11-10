@@ -101,7 +101,7 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetTraverse.strokeStyle = white;
         gibbetTraverse.lineWidth = 3;
         gibbetTraverse.beginPath();
-        gibbetTraverse.moveTo(58,60);
+        gibbetTraverse.moveTo(64,60);
         gibbetTraverse.lineTo(152,60);
         gibbetTraverse.stroke();
 
@@ -110,8 +110,8 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetVertical.strokeStyle = white;
         gibbetVertical.lineWidth = 3;
         gibbetVertical.beginPath();
-        gibbetVertical.moveTo(60,60);
-        gibbetVertical.lineTo(60,397);
+        gibbetVertical.moveTo(65,60);
+        gibbetVertical.lineTo(65,390);
         gibbetVertical.stroke();
 
         gibbetSocle = hangman.getContext("2d");
@@ -119,8 +119,8 @@ window.addEventListener("DOMContentLoaded", function(){
         gibbetSocle.strokeStyle = white;
         gibbetSocle.lineWidth = 3;
         gibbetSocle.beginPath();
-        gibbetSocle.moveTo(120,398);
-        gibbetSocle.lineTo(0,398);
+        gibbetSocle.moveTo(125,390);
+        gibbetSocle.lineTo(5,390);
         gibbetSocle.stroke();
     }
 })
