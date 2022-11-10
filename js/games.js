@@ -66,11 +66,34 @@ $(document).ready(function(){
         })
     };
 
+    //fonction d'affichage du hangman en fonction du nombre d'erruer du joueur
+    function hangman_steps(error_counter){
+        switch(error_counter){
+            case 1:
+                gibbet();
+                break;
+            case 2:
+                headHangman();
+                break;
+            case 3:
+                bodyHangman();
+                break;
+            case 4:
+                armRightHangman();
+                break;
+            case 5:
+                armLeftHangman();
+                break;
+            case 6:
+                legRightHangman();
+                break;
+            case 7:
+                legLeftHangman();
+                break;
+        };
+    };
+
 });
-
-/*********Écoute du clavier physique tout le document************/
-
-
 
 
 /*
