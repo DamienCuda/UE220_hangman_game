@@ -22,8 +22,6 @@ $(document).ready(function(){
     hidden_word(mystery_word);                          //Les tirets représentant le mot mystère sont générés en fonction de la longueur
 
 
-    hangman_steps(7)
-
     
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
     
@@ -69,7 +67,9 @@ $(document).ready(function(){
 
         if(error == true){
             /* ICI on gere les erreurs */
-            alert("erreur")
+            error_counter++
+            //alert("erreur: " + error_counter)
+            hangman_steps(error_counter)
         }
 
         console.log(mysteryWordArray)
