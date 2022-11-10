@@ -1,3 +1,6 @@
+
+import * as hangman from "./hangman.js";
+
 $(document).ready(function(){
 
     /***********LES VARIABLES*********/
@@ -19,6 +22,8 @@ $(document).ready(function(){
     hidden_word(mystery_word);                          //Les tirets représentant le mot mystère sont générés en fonction de la longueur
 
 
+    hangman_steps(7)
+
     
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
     
@@ -32,13 +37,55 @@ $(document).ready(function(){
      
     //Écoute du clavier virtuel
     var letters = $('.letter');
+
+    let mysteryWordArray = [];
+    let wordTemp = [];
+
+    mysteryWordArray = mystery_word.toUpperCase().split('')
+
+    for(let i = 0; i < mysteryWordArray.length; i++){
+        wordTemp.push("_");
+    }
+
     $(letters).each(function(key, value){
         $(value).click(function(){
-            choosen_letter = value.innerHTML;
-            show_letters(0, choosen_letter);
+            verif(choosen_letter,value.textContent);
         })
     });
 
+    function verif(choosen_letter, value){
+
+        let error = false;
+        for(let i = 0; i < mysteryWordArray.length; i++){
+            if(mysteryWordArray.includes(value)){
+                if(mysteryWordArray[i].indexOf(value) !== -1){
+                    wordTemp[i] = value
+                    show_letters(i, value);
+                }
+            }else{
+                error = true;
+            }
+        }
+
+        if(error == true){
+            /* ICI on gere les erreurs */
+            alert("erreur")
+        }
+
+        console.log(mysteryWordArray)
+        console.log(wordTemp)
+
+        let tempWord = $(".mystery_letters")
+        let tempWordSize = 0;
+        $(tempWord).each((key, value) =>{
+            if(value.textContent !== "_"){
+                tempWordSize++
+            }
+        })
+
+        /* Je ne sais pas à quoi servais exactement cette ligne damien donc je l'ai commenté au cas ou c'était important */
+        //choosen_letter = value.innerHTML;
+    }
     
     /***********LES FONCTIONS*********/
 
@@ -70,25 +117,25 @@ $(document).ready(function(){
     function hangman_steps(error_counter){
         switch(error_counter){
             case 1:
-                gibbet();
+                hangman.gibbet();
                 break;
             case 2:
-                headHangman();
+                hangman.headHangman();
                 break;
             case 3:
-                bodyHangman();
+                hangman.bodyHangman();
                 break;
             case 4:
-                armRightHangman();
+                hangman.armRightHangman();
                 break;
             case 5:
-                armLeftHangman();
+                hangman.armLeftHangman();
                 break;
             case 6:
-                legRightHangman();
+                hangman.legRightHangman();
                 break;
             case 7:
-                legLeftHangman();
+                hangman.legLeftHangman();
                 break;
         };
     };
