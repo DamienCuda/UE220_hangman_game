@@ -1,11 +1,10 @@
  /* Canvas */
- #hangman{
+#hangman{
     background-image: url('../assets/jason-dent-itA0ybdIDTs-unsplash.jpg');
     background-size: cover;                      
     background-repeat: no-repeat;
     background-position: center center;
 }
-
 
 .mystery_letters{
     font-size: 2.5rem;
