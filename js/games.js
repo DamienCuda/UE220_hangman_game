@@ -17,18 +17,27 @@ $(document).ready(function(){
     generate_keyboard();                                //Le clavier est généré
                                                         //choix aléatoire du mot à injecter dans la variable mystery_word
     hidden_word(mystery_word);                          //Les tirets représentant le mot mystère sont générés en fonction de la longueur
- 
+
+
     
-    /***********ÉVENEMENTS*********/
+    /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
     
+    //Écoute du clavier phisique
+    $(document).keydown(function(event){
+        if ((event.keyCode >= 65) && (event.keyCode <= 90)){ //Seul les lettres avec le keycode entre 65 et 90 sont ajoutées à la variable choosen_letter
+            choosen_letter = event.key.toUpperCase();
+            show_letters(0, choosen_letter);
+        }
+    });
+     
     //Écoute du clavier virtuel
     var letters = $('.letter');
     $(letters).each(function(key, value){
         $(value).click(function(){
-            choosen_letter = value.innerHTML;
-            // fonction verif(choosen_letter)
+            show_letters(0, choosen_letter);
         })
     });
+
     
     /***********LES FONCTIONS*********/
 
@@ -45,16 +54,22 @@ $(document).ready(function(){
            $("#keyboard_container").append(`<span class="letter frederica_font">${letter}</span>`);
         };
     };
+
+    //Fonction d'affichage de la lettre si bonne pioche
+    function show_letters(index, letter){ //Prend 2 paramètres l'index de la lettre dans le mot et la lettre
+        var mystery_letters = $('.mystery_letters');
+        $(mystery_letters).each((key, value) =>{
+            if(key === index){
+                value.innerHTML = letter;
+            }
+        })
+    };
+
 });
 
 /*********Écoute du clavier physique tout le document************/
 
-$(document).keydown(function(event){
-    if ((event.keyCode >= 65) && (event.keyCode <= 90)){ //Seul les lettres avec le keycode entre 65 et 90 sont ajoutées à la variable choosen_letter
-        choosen_letter = event.key.toUpperCase();
-        // fonction verif(choosen_letter)
-    }
-});
+
 
 
 /*
