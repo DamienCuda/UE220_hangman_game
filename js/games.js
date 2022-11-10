@@ -69,7 +69,8 @@ $(document).ready(function(){
 
         if(error == true){
             /* ICI on gere les erreurs */
-            alert("erreur")
+            error_counter++
+            alert("erreur: " + error_counter)
         }
 
         console.log(mysteryWordArray)
