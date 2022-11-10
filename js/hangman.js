@@ -13,6 +13,7 @@ export function headHangman(){
     headHangman.closePath();
 }
 
+
 export function bodyHangman(){
     headHangman();
     let bodyHangman = hangman.getContext("2d");

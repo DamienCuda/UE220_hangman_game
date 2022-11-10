@@ -1,3 +1,4 @@
+
 import * as hangman from "./hangman.js";
 
 $(document).ready(function(){
@@ -20,6 +21,7 @@ $(document).ready(function(){
                                                         //choix aléatoire du mot à injecter dans la variable mystery_word
     hidden_word(mystery_word);                          //Les tirets représentant le mot mystère sont générés en fonction de la longueur
 
+
     hangman_steps(7)
 
     
@@ -35,6 +37,7 @@ $(document).ready(function(){
      
     //Écoute du clavier virtuel
     var letters = $('.letter');
+
     let mysteryWordArray = [];
     let wordTemp = [];
 
@@ -83,7 +86,6 @@ $(document).ready(function(){
         /* Je ne sais pas à quoi servais exactement cette ligne damien donc je l'ai commenté au cas ou c'était important */
         //choosen_letter = value.innerHTML;
     }
-
     
     /***********LES FONCTIONS*********/
 
