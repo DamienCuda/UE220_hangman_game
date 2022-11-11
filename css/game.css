@@ -32,3 +32,12 @@
 #footer{
     min-width: 99vw;
 }
+
+.close{
+    border: none !important;
+    background: #fff !important;
+}
+
+.modal-loose{
+    margin-top: 200px;
+}

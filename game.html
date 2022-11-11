@@ -28,6 +28,28 @@
                 <!-- Scoreboard here -->
             </aside>
             <section id="game_container" class="col-10 pb-4">
+
+                <!-- Modale Loose -->
+                <div class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-loose" role="document" style="display:block">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Perdu !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Dommage... Peut-être la prochaine fois ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Re-start</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Quitter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="container">
                     <div id="game_top" class="row h-75">
                         <div id="canvas_container" class="col-6 p-4 text-center">
@@ -58,6 +80,7 @@
             </p>
         </footer>
     </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="module" src="js/hangman.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
