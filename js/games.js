@@ -1,5 +1,6 @@
 
 import * as hangman from "./hangman.js";
+import {headHangman} from "./hangman.js";
 
 $(document).ready(function(){
 
@@ -9,20 +10,23 @@ $(document).ready(function(){
     var choosen_letter = ""; // Lettre choisit par le joueur au click ou au clavier
     var player_pseudo = sessionStorage.getItem('pseudo'); //Récupération du pseudo de session
     var dificulty_level = sessionStorage.getItem('level'); //Récupération du niveau de session
+    var player_score = sessionStorage.getItem('score'); //Récupération du score de session
     var error_counter = 0;
-    
 
+    var isGameOver = false;
     /***********INITIALISATION DU JEU*********/
 
     $("#current_difficulty").html(dificulty_level);     //Injection du niveau de difficulté
     $("#player_pseudo").html(player_pseudo);            //Injection du pseudo
+    $("#player_score").html(player_score);                     //Injection du score
 
     generate_keyboard();                                //Le clavier est généré
                                                         //choix aléatoire du mot à injecter dans la variable mystery_word
-    hidden_word(mystery_word);                          //Les tirets représentant le mot mystère sont générés en fonction de la longueur
 
 
-    
+    init(mystery_word)
+
+
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
     
     //Écoute du clavier phisique
@@ -32,26 +36,43 @@ $(document).ready(function(){
             show_letters(0, choosen_letter);
         }
     });
-     
-    //Écoute du clavier virtuel
-    var letters = $('.letter');
 
-    let mysteryWordArray = [];
-    let wordTemp = [];
+    function init(mystery_word){
 
-    mysteryWordArray = mystery_word.toUpperCase().split('')
+        hidden_word(mystery_word);
 
-    for(let i = 0; i < mysteryWordArray.length; i++){
-        wordTemp.push("_");
+        //Écoute du clavier virtuel
+        var letters = $('.letter');
+
+        let mysteryWordArray = [];
+        let wordTemp = [];
+
+        mysteryWordArray = mystery_word.toUpperCase().split('')
+
+        for(let i = 0; i < mysteryWordArray.length; i++){
+            wordTemp.push("_");
+        }
+
+        $(letters).each(function(key, value){
+            $(value).click(function(){
+                verif(value.textContent, mysteryWordArray, wordTemp);
+            })
+        });
     }
 
-    $(letters).each(function(key, value){
+    // Fonction exit lors du click sur l'un des boutons exit
+    let exitBtn = $(".btn-exit")
+    $(exitBtn).each(function(key, value){
+
         $(value).click(function(){
-            verif(choosen_letter,value.textContent);
+            // On vide la sessionStorage
+            sessionStorage.clear();
+            // On reload la page pour refrech le jeu
+            window.location.href = "index.html";
         })
     });
 
-    function verif(choosen_letter, value){
+    function verif(value, mysteryWordArray, wordTemp){
 
         let error = false;
         for(let i = 0; i < mysteryWordArray.length; i++){
@@ -65,15 +86,16 @@ $(document).ready(function(){
             }
         }
 
-        if(error == true){
-            /* ICI on gere les erreurs */
-            error_counter++
-            //alert("erreur: " + error_counter)
-            hangman_steps(error_counter)
+
+        if(!wordTemp.includes("_")){
+            win();
         }
 
-        console.log(mysteryWordArray)
-        console.log(wordTemp)
+
+        if(error == true){
+            error_counter++
+            hangman_steps(error_counter, value)
+        }
 
         let tempWord = $(".mystery_letters")
         let tempWordSize = 0;
@@ -97,7 +119,7 @@ $(document).ready(function(){
     };
     //Fonction de génération du clavier virtuel
     function generate_keyboard(){
-        for( var i = 65; i <= 90; i++){
+        for(var i = 65; i <= 90; i++){
            var letter = String.fromCharCode(i);
            $("#keyboard_container").append(`<span class="letter frederica_font">${letter}</span>`);
         };
@@ -109,63 +131,146 @@ $(document).ready(function(){
         $(mystery_letters).each((key, value) =>{
             if(key === index){
                 value.innerHTML = letter;
+
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letter){
+                        $(value).addClass("success-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("success-letter")
+                        }, "500");
+                    }
+                });
+
             }
         })
     };
 
+    function loose(error_counter){
+
+        // On affiche la modal de loose
+        $("#modal-loose").css("display", "block");
+        $("#modal-loose").addClass("in")
+
+        let restartBtn = document.getElementsByClassName("btn-restart")[0]
+        restartBtn.addEventListener("click", function(){
+
+            // On cache la modal loose
+            $("#modal-loose").css("display", "none");
+            $("#modal-loose").removeClass("in")
+
+            // On reload la page pour refrech le jeu
+            location.reload();
+        });
+    }
+
+    function win(){
+        // On affiche la modal de win
+        $("#modal-win").css("display", "block");
+        $("#modal-win").addClass("in")
+
+        let restartBtn = document.getElementsByClassName("btn-restart")[1]
+        restartBtn.addEventListener("click", function(){
+
+            // On cache la modal loose
+            $("#modal-win").css("display", "none");
+            $("#modal-win").removeClass("in")
+
+            // On enregistre le score dans le sessionStorage
+            let score = parseInt(sessionStorage.getItem('score')) + 10;
+            sessionStorage.setItem('score', score);
+
+            // On reload la page pour refrech le jeu
+            location.reload();
+        });
+    }
+
     //fonction d'affichage du hangman en fonction du nombre d'erruer du joueur
-    function hangman_steps(error_counter){
+    function hangman_steps(error_counter, letterPressed){
         switch(error_counter){
             case 1:
                 hangman.gibbet();
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
             case 2:
                 hangman.headHangman();
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
             case 3:
                 hangman.bodyHangman();
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
             case 4:
                 hangman.armRightHangman();
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
             case 5:
                 hangman.armLeftHangman();
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
             case 6:
                 hangman.legRightHangman();
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
             case 7:
                 hangman.legLeftHangman();
-                loose();
+                setTimeout(() => {
+                    loose(error_counter);
+                }, "300");
+                $('.letter').each(function(key, value){
+                    if(value.textContent == letterPressed){
+                        $(value).addClass("error-letter")
+                        setTimeout(() => {
+                            $(value).removeClass("error-letter")
+                        }, "500");
+                    }
+                });
                 break;
         };
     };
 
 });
-
-function loose(){
-    let modalLoose =
-        '<div className="modal" tabIndex="-1" role="dialog" style="display:block">' +
-            '<div className="modal-dialog" role="document">' +
-                '<div className="modal-content">' +
-                    '<div className="modal-header">' +
-                        '<h5 className="modal-title">Modal title</h5>' +
-                        '<button type="button" className="close" data-dismiss="modal" aria-label="Close">' +
-                            '<span aria-hidden="true"></span>' +
-                        '</button>' +
-                    '</div>' +
-                    '<div className="modal-body">' +
-                        '<p>Modal body text goes here.</p>' +
-                    '</div>' +
-                    '<div className="modal-footer">' +
-                        '<button type="button" className="btn btn-primary">Save changes</button>' +
-                        '<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>' +
-                    '</div>' +
-                '</div>' +
-            '</div>' +
-        '</div>';
-    document.getElementById("game_container").innerHTML += modalLoose
-}
 
 
 /*
