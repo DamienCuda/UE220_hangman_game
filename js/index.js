@@ -17,7 +17,7 @@ $(document).ready(function(){
     function start_game(e){
         if ($(pseudo_input).val() == ""){
             e.preventDefault();
-            $(error_message).html('Vous devez entrer votre pseudo pour jouer ;)') //Affichage message d'erreur si pas de pseudo choisit
+            $(error_message).html('Vous devez entrer votre pseudo pour jouer ⛔') //Affichage message d'erreur si pas de pseudo choisit
         }else{
             sessionStorage.setItem('pseudo', $(pseudo_input).val()); //récupération du pseudo
             sessionStorage.setItem('score', 0); //récupération du pseudo
