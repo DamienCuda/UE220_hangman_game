@@ -13,6 +13,8 @@
 
 /* Lettres clavier */
 .letter{
+    display: flex;
+    justify-content: center;
     cursor: pointer;
     color: black;
     padding: 1rem;
@@ -29,6 +31,42 @@
     background-color: #30302f;
     scale: 1.2;
 }
+
+.error-letter{
+    background-color: orangered !important;
+}
+
+.error-letter:hover{
+    background-color: orangered !important;
+}
+
+.success-letter{
+    background-color: lightgreen !important;
+}
+
+.success-letter:hover{
+    background-color: lightgreen !important;
+}
+
 #footer{
     min-width: 99vw;
+}
+
+.close{
+    border: none !important;
+    background: #fff !important;
+}
+
+.modal-loose{
+    padding-top: 200px;
+}
+
+#exit{
+    color: gray;
+    font-size: 20px;
+}
+
+#exit:hover{
+    color: #239BF7;
+    cursor: pointer;
 }
