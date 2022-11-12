@@ -1,16 +1,14 @@
-
 import * as hangman from "./hangman.js";
-import {headHangman} from "./hangman.js";
 
 $(document).ready(function(){
 
     /***********LES VARIABLES*********/
 
-    var mystery_word = "test"; // Mot à découvrir
     var choosen_letter = ""; // Lettre choisit par le joueur au click ou au clavier
     var player_pseudo = sessionStorage.getItem('pseudo'); //Récupération du pseudo de session
     var dificulty_level = sessionStorage.getItem('level'); //Récupération du niveau de session
     var player_score = sessionStorage.getItem('score'); //Récupération du score de session
+    var coef = sessionStorage.getItem('coef'); //Récupération du coef
     var error_counter = 0;
     var errorSound = new Audio('./sound/error.mp3');
     var successSound = new Audio('./sound/success.mp3');
@@ -27,9 +25,9 @@ $(document).ready(function(){
     generate_keyboard();                                //Le clavier est généré
                                                         //choix aléatoire du mot à injecter dans la variable mystery_word
 
+    var mystery_word = "test"; // Mot à découvrir
 
-    init(mystery_word)
-
+    generateWord()
 
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
 
@@ -121,6 +119,13 @@ $(document).ready(function(){
                 }
             }, "200");
 
+            // On enregistre le score dans le sessionStorage
+            let score = parseInt(sessionStorage.getItem('score')) + 30 - 5 * error_counter * coef;
+                if(score <= 0){
+                    score = 0
+                }
+            sessionStorage.setItem('score', score);
+
             win();
         }
 
@@ -163,12 +168,53 @@ $(document).ready(function(){
         };
     };
 
+    function generateWord(){
+
+        let json;
+
+        switch(coef){
+            case "1.5":
+                json = "wordeasy.json";
+                break;
+            case "2":
+                json = "wordmedium.json";
+                break;
+            case "2.5":
+                json = "wordhard.json";
+                break;
+        }
+
+        $.ajax({
+            url: "./js/json/wordeasy.json",
+            type: "GET",
+            data: {},
+            dataType: "json",
+            success: function(reponse) {
+                let random;
+                for(let i = 0; i < reponse.length; i++){
+                    random = Math.floor(Math.random() * reponse.length)
+                }
+                init(reponse[random])
+            },
+            error: function(error){
+                console.log(error)
+            }
+        });
+
+
+
+    }
+
     //Fonction d'affichage de la lettre si bonne pioche
     function show_letters(index, letter){ //Prend 2 paramètres l'index de la lettre dans le mot et la lettre
         var mystery_letters = $('.mystery_letters');
         $(mystery_letters).each((key, value) =>{
             if(key === index){
                 value.innerHTML = letter;
+
+                // On enregistre le score dans le sessionStorage
+                let score = parseInt(sessionStorage.getItem('score')) + 5;
+                sessionStorage.setItem('score', score);
 
                 $('.letter').each(function(key, value){
                     if(value.textContent == letter){
@@ -196,10 +242,6 @@ $(document).ready(function(){
             $("#modal-lose").css("display", "none");
             $("#modal-lose").removeClass("in")
 
-            // On vide le score
-            let score = 0
-            sessionStorage.setItem('score', score);
-
             // On reload la page pour refrech le jeu
             location.reload();
         });
@@ -216,10 +258,6 @@ $(document).ready(function(){
             // On cache la modal lose
             $("#modal-win").css("display", "none");
             $("#modal-win").removeClass("in")
-
-            // On enregistre le score dans le sessionStorage
-            let score = parseInt(sessionStorage.getItem('score')) + 10;
-            sessionStorage.setItem('score', score);
 
             // On reload la page pour refrech le jeu
             location.reload();
@@ -304,6 +342,10 @@ $(document).ready(function(){
                         //On joue l'audio de lose
                         loseSound.play();
                     }
+
+                    // On vide le score
+                    let score = 0
+                    sessionStorage.setItem('score', score);
 
                     lose();
                 }, "300");
