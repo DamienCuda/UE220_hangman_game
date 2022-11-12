@@ -33,8 +33,28 @@ $(document).ready(function(){
                 $.each( dificulty_level, function( key, value ) {
                     if (value.checked){
                         sessionStorage.setItem('level', value.value); //récupération niveau de dificulté choisit
+
+                        let coef;
+                        switch(value.value){
+                            case "Facile":
+                                coef = 1.5;
+                                // On enregistre le score dans le sessionStorage
+                                sessionStorage.setItem('coef', coef);
+                                break;
+                            case "Normal":
+                                coef = 2;
+                                // On enregistre le score dans le sessionStorage
+                                sessionStorage.setItem('coef', coef);
+                                break;
+                            case "Difficile":
+                                coef = 2.5;
+                                // On enregistre le score dans le sessionStorage
+                                sessionStorage.setItem('coef', coef);
+                                break;
+                        }
                     }
                 });
+
                 // On charge le jeu
                 window.location.href = "game.html";
             }else{
