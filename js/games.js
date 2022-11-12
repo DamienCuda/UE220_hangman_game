@@ -28,14 +28,6 @@ $(document).ready(function(){
 
 
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
-    
-    //Écoute du clavier phisique
-    $(document).keydown(function(event){
-        if ((event.keyCode >= 65) && (event.keyCode <= 90)){ //Seul les lettres avec le keycode entre 65 et 90 sont ajoutées à la variable choosen_letter
-            choosen_letter = event.key.toUpperCase();
-            show_letters(0, choosen_letter);
-        }
-    });
 
     function init(mystery_word){
 
@@ -53,10 +45,19 @@ $(document).ready(function(){
             wordTemp.push("_");
         }
 
+        //Écoute du clavier virtuel
         $(letters).each(function(key, value){
             $(value).click(function(){
                 verif(value.textContent, mysteryWordArray, wordTemp);
             })
+        });
+
+        //Écoute du clavier phisique
+        $(document).keydown(function(event){
+            if ((event.keyCode >= 65) && (event.keyCode <= 90)){ //Seul les lettres avec le keycode entre 65 et 90 sont ajoutées à la variable choosen_letter
+                choosen_letter = event.key.toUpperCase();
+                verif(choosen_letter, mysteryWordArray, wordTemp);
+            }
         });
     }
 
