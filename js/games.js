@@ -32,7 +32,7 @@ $(document).ready(function(){
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
 
     function init(mystery_word){
-
+alert(mystery_word)
         hidden_word(mystery_word);
 
         if(mute == "false"){
@@ -104,12 +104,13 @@ $(document).ready(function(){
         for(let i = 0; i < mysteryWordArray.length; i++){
             if(mysteryWordArray.includes(value)){
                 if(mysteryWordArray[i].indexOf(value) !== -1){
-                    wordTemp[i] = value
-                    show_letters(i, value);
-
-                    if(mute === "false"){
-                        //On joue l'audio de success
-                        successSound.play();
+                    if(wordTemp[i] != value){
+                        wordTemp[i] = value
+                        show_letters(i, value);
+                        if(mute === "false"){
+                            //On joue l'audio de success
+                            successSound.play();
+                        }
                     }
                 }
             }else{
@@ -126,14 +127,12 @@ $(document).ready(function(){
                     winSound.play();
                 }
             }, "200");
-
-            // On enregistre le score dans le sessionStorage
-            let score = parseInt(sessionStorage.getItem('score')) + 30 - 5 * error_counter * coef;
-                if(score <= 0){
-                    score = 0
-                }
+            let score = parseInt(sessionStorage.getItem('score')) + 5 + 7 - error_counter * coef;
+            if(score <= 0){
+                score = 0
+            }
             sessionStorage.setItem('score', score);
-
+            $("#player_score").html(score);
             win();
         }
 
@@ -141,6 +140,13 @@ $(document).ready(function(){
         if(error == true){
             error_counter++
             hangman_steps(error_counter, value)
+
+            let score = parseInt(sessionStorage.getItem('score')) - 1;
+            if(score <= 0){
+                score = 0
+            }
+            sessionStorage.setItem('score', score);
+            $("#player_score").html(score);
 
             if(mute === "false") {
                 //On joue l'audio de l'erreur
@@ -219,10 +225,13 @@ $(document).ready(function(){
         $(mystery_letters).each((key, value) =>{
             if(key === index){
                 value.innerHTML = letter;
-
                 // On enregistre le score dans le sessionStorage
-                let score = parseInt(sessionStorage.getItem('score')) + 5;
+                let score = parseInt(sessionStorage.getItem('score')) + 1;
+                if(score <= 0){
+                    score = 0
+                }
                 sessionStorage.setItem('score', score);
+                $("#player_score").html(score);
 
                 $('.letter').each(function(key, value){
                     if(value.textContent == letter){
@@ -351,9 +360,12 @@ $(document).ready(function(){
                         loseSound.play();
                     }
 
-                    // On vide le score
-                    let score = 0
+                    let score = parseInt(sessionStorage.getItem('score')) - 5 - error_counter * coef;
+                    if(score <= 0){
+                        score = 0
+                    }
                     sessionStorage.setItem('score', score);
+                    $("#player_score").html(score);
 
                     lose();
                 }, "300");
@@ -370,25 +382,3 @@ $(document).ready(function(){
     };
 
 });
-
-
-/*
-while(error_counter < 7){
-
-};
-    
-if error_counter == 7 Fonction GAME OVER
-
-FONCTION SCORE
-
-FONCTION RESTART
-
-FONCTION verif(choosen_letter)
-    si lettre dans le mot 
-        fonction affichage
-            si tableau_temp == mystery_word
-            fonction WIN
-            break
-    sinon error_counter ++
-    fonction afffichage canvas
-*/
