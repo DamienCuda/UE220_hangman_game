@@ -28,7 +28,7 @@ $(document).ready(function(){
             let pseudo = escape($(pseudo_input).val());
             if(regex.test(pseudo)){
                 sessionStorage.setItem('pseudo',pseudo ); //récupération du pseudo
-                sessionStorage.setItem('score', 0); //récupération du pseudo
+                sessionStorage.setItem('score', 0); //initialisation du score
                 sessionStorage.setItem('sound', false); //On active par défaut le son
                 $.each( dificulty_level, function( key, value ) {
                     if (value.checked){
@@ -38,17 +38,17 @@ $(document).ready(function(){
                         switch(value.value){
                             case "Facile":
                                 coef = 1.5;
-                                // On enregistre le score dans le sessionStorage
+                                // On enregistre le coeff dans le sessionStorage
                                 sessionStorage.setItem('coef', coef);
                                 break;
                             case "Normal":
                                 coef = 2;
-                                // On enregistre le score dans le sessionStorage
+                                // On enregistre le coeff dans le sessionStorage
                                 sessionStorage.setItem('coef', coef);
                                 break;
                             case "Difficile":
                                 coef = 2.5;
-                                // On enregistre le score dans le sessionStorage
+                                // On enregistre le coeff dans le sessionStorage
                                 sessionStorage.setItem('coef', coef);
                                 break;
                         }
