@@ -42,6 +42,7 @@ $(document).ready(function(){
         let wordTemp = [];
 
         mysteryWordArray = mystery_word.toUpperCase().split('')
+        console.log(mysteryWordArray)
 
         for(let i = 0; i < mysteryWordArray.length; i++){
             wordTemp.push("_");
@@ -185,7 +186,7 @@ $(document).ready(function(){
         }
 
         $.ajax({
-            url: "./js/json/wordeasy.json",
+            url: "./js/json/" + json,
             type: "GET",
             data: {},
             dataType: "json",
