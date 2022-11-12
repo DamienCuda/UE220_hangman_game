@@ -185,7 +185,7 @@ $(document).ready(function(){
         }
 
         $.ajax({
-            url: "./js/json/wordeasy.json",
+            url: "./js/json/" + json,
             type: "GET",
             data: {},
             dataType: "json",
