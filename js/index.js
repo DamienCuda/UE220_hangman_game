@@ -11,6 +11,11 @@ $(document).ready(function(){
 
     $(start_btn).click(start_game);
 
+    $(pseudo_input).keypress(function( event ) {
+        if (event.which == 13) {
+            start_game(event)
+        }
+    })
       /***********LES FONCTIONS*********/
 
     //Fonction de vérification du pseudo et verification du niveau de difficulté
@@ -29,6 +34,8 @@ $(document).ready(function(){
                         sessionStorage.setItem('level', value.value); //récupération niveau de dificulté choisit
                     }
                 });
+                // On charge le jeu
+                window.location.href = "game.html";
             }else{
                 e.preventDefault();
                 $(error_message).html('Vous devez entrer un pseudo correct pour jouer ⛔') //Affichage message d'erreur si pseudo pas correct
