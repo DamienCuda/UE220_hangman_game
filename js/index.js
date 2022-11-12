@@ -29,6 +29,7 @@ $(document).ready(function(){
             if(regex.test(pseudo)){
                 sessionStorage.setItem('pseudo',pseudo ); //récupération du pseudo
                 sessionStorage.setItem('score', 0); //récupération du pseudo
+                sessionStorage.setItem('sound', false); //On active par défaut le son
                 $.each( dificulty_level, function( key, value ) {
                     if (value.checked){
                         sessionStorage.setItem('level', value.value); //récupération niveau de dificulté choisit
