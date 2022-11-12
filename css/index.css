@@ -9,3 +9,7 @@
 #footer{
     min-width: 98vw;
 }
+
+#game_rules p{
+    text-align: justify;
+}

@@ -63,10 +63,14 @@
 
 #exit{
     color: gray;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 #exit:hover{
     color: #239BF7;
     cursor: pointer;
 }
+
+ #game_rules p{
+     text-align: justify;
+ }
