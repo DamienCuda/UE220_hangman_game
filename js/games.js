@@ -32,7 +32,7 @@ $(document).ready(function(){
     /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
 
     function init(mystery_word){
-alert(mystery_word)
+
         hidden_word(mystery_word);
 
         if(mute == "false"){
