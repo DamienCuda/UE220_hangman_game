@@ -63,7 +63,7 @@
 
 #icon-parametre{
     display: flex;
-    align-items: baseline;
+    align-items: center;
 }
 
 #exit{
@@ -79,7 +79,7 @@
 }
 
 #exit:hover{
-    color: #239BF7;
+    color: red;
     cursor: pointer;
 }
 

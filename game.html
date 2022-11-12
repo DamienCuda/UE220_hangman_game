@@ -20,24 +20,24 @@
     </header>
     <div class="container">
         <main id= "main_wrapper" class="row">
-            <aside id="score_container" class="col-2 pt-4">
-                <div id="current_game_infos">
-                    <div class="mb-1 col-12">
+            <aside id="score_container" class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 pt-4">
+                <div id="current_game_infos" class="d-flex flex-lg-column flex-md-row flex-xl-column flex-sm-row flex-row justify-content-center justify-content-sm-center justify-content-xl-start justify-content-md-center justify-content-lg-start text-xl-start text-md-center text-lg-start text-sm-center text-center align-items-md-center align-items-lg-start align-items-xl-start align-sm-items-center align-items-center">
+                    <div class="mb-1 col-3 col-md-3 col-lg-12 col-sm-3 col-xl-12">
                         <h5 class="h5 frederica_font">Paramètre :</h5>
-                        <div id="icon-parametre">
+                        <div id="icon-parametre" class="justify-content-center justify-content-md-center justify-content-lg-start justify-content-sm-center justify-content-xl-start">
                             <i class='bx bx-log-out btn-exit' title="Exit" id="exit"></i>
                             <span class="bi bi-volume-up" id="volume"></span>
                         </div>
                     </div>
-                    <div class="mb-1 col-12">
+                    <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
                         <h5 class="h5 frederica_font">Score :</h5>
                         <p id="player_score"></p>
                     </div>
-                    <div class="mb-1 col-12">
+                    <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
                         <h5 class="h5 frederica_font">Joueur :</h5>
                         <p id="player_pseudo"></p>
                     </div>
-                    <div class="mb-1 col-12">
+                    <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
                         <h5 class="h5 frederica_font">Niveau de difficulté :</h5>
                         <p id="current_difficulty"></p>
                     </div>
@@ -49,7 +49,7 @@
                         A chaque fois que le joueur devine une lettre, celle-ci est affichée. Dans le cas contraire, le dessin d’un pendu se met à apparaître.</p>
                 </div>
             </aside>
-            <section id="game_container" class="col-10 pb-4">
+            <section id="game_container" class="col-12 col-sm-12 col-xl-10 col-md-12 col-lg-10 pb-4 justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-start justify-content-xl-start  text-md-center text-sm-center text-lg-start text-xl-start text-center align-items-md-center align-items-sm-center align-items-xl-start align-items-lg-start align-items-center">
 
                 <!-- Modale lose -->
                 <div class="modal modal-lose fade" id="modal-lose" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="opacity:100;display:none">
@@ -89,18 +89,18 @@
 
                 <div class="container">
                     <div id="game_top" class="row h-75">
-                        <div id="canvas_container" class="col-6 p-4 text-center">
+                        <div id="canvas_container" class="col-12 col-md-12 col-lg-6 col-sm-12 col-xl-6 p-4 text-center">
                             <canvas id="hangman" width="300" height="400">
                                 Votre navigateur ne prend pas le canvas en charge
                                 <!-- Canvas here -->
                             </canvas>
                         </div>
-                        <div id="mystery_word_container" class="col-6 p-4 d-flex justify-content-center align-items-center gap-4">
+                        <div id="mystery_word_container" class="col-12 col-sm-12 col-xl-6 col-md-12 col-lg-6 p-4 d-flex justify-content-center align-items-center gap-4">
                             <!-- Mystery word here -->
                         </div>
                     </div>
                     <div id="game_bottom" class="row h-25">
-                        <div id="keyboard_container" class="col-12 p-4 d-flex flex-wrap justify-content-center align-items-center">
+                        <div id="keyboard_container" class="col-12 col-sm-12 col-xl-12 col-md-12 col-lg-12 p-4 d-flex flex-wrap justify-content-center align-items-center">
                             <!-- Keyboard will be generated here !!-->
                         </div>
                     </div>
