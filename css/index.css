@@ -13,3 +13,9 @@
 #game_rules p{
     text-align: justify;
 }
+
+#footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
