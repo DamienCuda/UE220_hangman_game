@@ -42,7 +42,6 @@ $(document).ready(function(){
         let wordTemp = [];
 
         mysteryWordArray = mystery_word.toUpperCase().split('')
-        console.log(mysteryWordArray)
 
         for(let i = 0; i < mysteryWordArray.length; i++){
             wordTemp.push("_");
