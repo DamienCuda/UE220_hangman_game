@@ -9,3 +9,13 @@
 #footer{
     min-width: 98vw;
 }
+
+#game_rules p{
+    text-align: justify;
+}
+
+#footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}

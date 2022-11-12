@@ -13,6 +13,8 @@
 
 /* Lettres clavier */
 .letter{
+    display: flex;
+    justify-content: center;
     cursor: pointer;
     color: black;
     padding: 1rem;
@@ -29,6 +31,70 @@
     background-color: #30302f;
     scale: 1.2;
 }
-#footer{
-    min-width: 99vw;
+
+.error-letter{
+    background-color: orangered !important;
 }
+
+.error-letter:hover{
+    background-color: orangered !important;
+}
+
+.success-letter{
+    background-color: lightgreen !important;
+}
+
+.success-letter:hover{
+    background-color: lightgreen !important;
+}
+
+#footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.close{
+    border: none !important;
+    background: #fff !important;
+}
+
+.modal-lose{
+    padding-top: 200px;
+}
+
+#icon-parametre{
+    display: flex;
+    align-items: center;
+}
+
+#exit{
+    color: gray;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.bi-volume-up, .bi-volume-mute{
+    color: gray;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+#exit:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.bi-volume-up:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.bi-volume-mute:hover{
+    color: #239BF7;
+    cursor: pointer;
+}
+
+ #game_rules p{
+     text-align: justify;
+ }
