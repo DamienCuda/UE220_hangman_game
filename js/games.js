@@ -35,6 +35,14 @@ $(document).ready(function(){
 
         hidden_word(mystery_word);
 
+        if(mute == "false"){
+            $("#volume").removeClass("bi-volume-mute")
+            $("#volume").addClass("bi-volume-up")
+        }else{
+            $("#volume").addClass("bi-volume-mute")
+            $("#volume").removeClass("bi-volume-up")
+        }
+
         //Écoute du clavier virtuel
         var letters = $('.letter');
 
