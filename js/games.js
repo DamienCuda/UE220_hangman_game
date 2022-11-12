@@ -12,8 +12,12 @@ $(document).ready(function(){
     var dificulty_level = sessionStorage.getItem('level'); //Récupération du niveau de session
     var player_score = sessionStorage.getItem('score'); //Récupération du score de session
     var error_counter = 0;
+    var errorSound = new Audio('./sound/error.mp3');
+    var successSound = new Audio('./sound/success.mp3');
+    var loseSound = new Audio('./sound/lose.mp3');
+    var winSound = new Audio('./sound/win.mp3');
+    let mute = sessionStorage.getItem('sound'); //Récupération de l'état du son
 
-    var isGameOver = false;
     /***********INITIALISATION DU JEU*********/
 
     $("#current_difficulty").html(dificulty_level);     //Injection du niveau de difficulté
@@ -59,6 +63,21 @@ $(document).ready(function(){
                 verif(choosen_letter, mysteryWordArray, wordTemp);
             }
         });
+
+        $("#volume").click(function(){
+            if($("#volume").hasClass("bi-volume-up")){
+                $("#volume").addClass("bi-volume-mute")
+                $("#volume").removeClass("bi-volume-up")
+                mute = "true";
+                sessionStorage.setItem('sound', mute);
+            }else{
+                $("#volume").addClass("bi-volume-up")
+                $("#volume").removeClass("bi-volume-mute")
+                mute = "false";
+                sessionStorage.setItem('sound', mute);
+            }
+        });
+
     }
 
     // Fonction exit lors du click sur l'un des boutons exit
@@ -81,6 +100,11 @@ $(document).ready(function(){
                 if(mysteryWordArray[i].indexOf(value) !== -1){
                     wordTemp[i] = value
                     show_letters(i, value);
+
+                    if(mute === "false"){
+                        //On joue l'audio de success
+                        successSound.play();
+                    }
                 }
             }else{
                 error = true;
@@ -89,6 +113,14 @@ $(document).ready(function(){
 
 
         if(!wordTemp.includes("_")){
+
+            setTimeout(() => {
+                if(mute === "false") {
+                    //On joue l'audio de win
+                    winSound.play();
+                }
+            }, "200");
+
             win();
         }
 
@@ -96,6 +128,11 @@ $(document).ready(function(){
         if(error == true){
             error_counter++
             hangman_steps(error_counter, value)
+
+            if(mute === "false") {
+                //On joue l'audio de l'erreur
+                errorSound.play();
+            }
         }
 
         let tempWord = $(".mystery_letters")
@@ -146,18 +183,18 @@ $(document).ready(function(){
         })
     };
 
-    function loose(){
+    function lose(){
 
-        // On affiche la modal de loose
-        $("#modal-loose").css("display", "block");
-        $("#modal-loose").addClass("in")
+        // On affiche la modal de lose
+        $("#modal-lose").css("display", "block");
+        $("#modal-lose").addClass("in")
 
         let restartBtn = document.getElementsByClassName("btn-restart")[0]
         restartBtn.addEventListener("click", function(){
 
-            // On cache la modal loose
-            $("#modal-loose").css("display", "none");
-            $("#modal-loose").removeClass("in")
+            // On cache la modal lose
+            $("#modal-lose").css("display", "none");
+            $("#modal-lose").removeClass("in")
 
             // On vide le score
             let score = 0
@@ -176,7 +213,7 @@ $(document).ready(function(){
         let restartBtn = document.getElementsByClassName("btn-restart")[1]
         restartBtn.addEventListener("click", function(){
 
-            // On cache la modal loose
+            // On cache la modal lose
             $("#modal-win").css("display", "none");
             $("#modal-win").removeClass("in")
 
@@ -260,8 +297,15 @@ $(document).ready(function(){
                 break;
             case 7:
                 hangman.legLeftHangman();
+
                 setTimeout(() => {
-                    loose();
+
+                    if(mute === "false") {
+                        //On joue l'audio de lose
+                        loseSound.play();
+                    }
+
+                    lose();
                 }, "300");
                 $('.letter').each(function(key, value){
                     if(value.textContent == letterPressed){

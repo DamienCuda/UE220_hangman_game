@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/game.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <title>Hangman</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -23,7 +24,10 @@
                 <div id="current_game_infos">
                     <div class="mb-1 col-12">
                         <h5 class="h5 frederica_font">Paramètre :</h5>
-                        <i class='bx bx-log-out btn-exit' title="Exit" id="exit"></i>
+                        <div id="icon-parametre">
+                            <i class='bx bx-log-out btn-exit' title="Exit" id="exit"></i>
+                            <span class="bi bi-volume-up" id="volume"></span>
+                        </div>
                     </div>
                     <div class="mb-1 col-12">
                         <h5 class="h5 frederica_font">Score :</h5>
@@ -47,12 +51,12 @@
             </aside>
             <section id="game_container" class="col-10 pb-4">
 
-                <!-- Modale Loose -->
-                <div class="modal modal-loose fade" id="modal-loose" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="opacity:100;display:none">
+                <!-- Modale lose -->
+                <div class="modal modal-lose fade" id="modal-lose" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="opacity:100;display:none">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="loose-title">Perdu ! 😭</h5>
+                                <h5 class="modal-title" id="lose-title">Perdu ! 😭</h5>
                             </div>
                             <div class="modal-body">
                                 <p>Dommage... Peut-être la prochaine fois ?</p>
@@ -66,7 +70,7 @@
                 </div>
 
                 <!-- Modale Win -->
-                <div class="modal modal-loose fade" id="modal-win" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="opacity:100;display:none">
+                <div class="modal modal-lose fade" id="modal-win" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="opacity:100;display:none">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
