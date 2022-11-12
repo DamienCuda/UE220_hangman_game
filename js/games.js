@@ -146,7 +146,7 @@ $(document).ready(function(){
         })
     };
 
-    function loose(error_counter){
+    function loose(){
 
         // On affiche la modal de loose
         $("#modal-loose").css("display", "block");
@@ -158,6 +158,10 @@ $(document).ready(function(){
             // On cache la modal loose
             $("#modal-loose").css("display", "none");
             $("#modal-loose").removeClass("in")
+
+            // On vide le score
+            let score = 0
+            sessionStorage.setItem('score', score);
 
             // On reload la page pour refrech le jeu
             location.reload();
@@ -257,7 +261,7 @@ $(document).ready(function(){
             case 7:
                 hangman.legLeftHangman();
                 setTimeout(() => {
-                    loose(error_counter);
+                    loose();
                 }, "300");
                 $('.letter').each(function(key, value){
                     if(value.textContent == letterPressed){
