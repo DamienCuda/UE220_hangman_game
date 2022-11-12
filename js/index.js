@@ -17,15 +17,22 @@ $(document).ready(function(){
     function start_game(e){
         if ($(pseudo_input).val() == ""){
             e.preventDefault();
-            $(error_message).html('Vous devez entrer votre pseudo pour jouer ;)') //Affichage message d'erreur si pas de pseudo choisit
+            $(error_message).html('Vous devez entrer votre pseudo pour jouer ⛔') //Affichage message d'erreur si pas de pseudo choisit
         }else{
-            sessionStorage.setItem('pseudo', $(pseudo_input).val()); //récupération du pseudo
-            sessionStorage.setItem('score', 0); //récupération du pseudo
-            $.each( dificulty_level, function( key, value ) {
-                if (value.checked){
-                    sessionStorage.setItem('level', value.value); //récupération niveau de dificulté choisit
-                }
-              });
+            let regex = /^[a-z0-9]+$/gi;
+            let pseudo = escape($(pseudo_input).val());
+            if(regex.test(pseudo)){
+                sessionStorage.setItem('pseudo',pseudo ); //récupération du pseudo
+                sessionStorage.setItem('score', 0); //récupération du pseudo
+                $.each( dificulty_level, function( key, value ) {
+                    if (value.checked){
+                        sessionStorage.setItem('level', value.value); //récupération niveau de dificulté choisit
+                    }
+                });
+            }else{
+                e.preventDefault();
+                $(error_message).html('Vous devez entrer un pseudo correct pour jouer ⛔') //Affichage message d'erreur si pseudo pas correct
+            }
         }
     }
 });
