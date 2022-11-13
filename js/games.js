@@ -39,7 +39,7 @@ $(document).ready(function(){
         });
     
     /***********LES ÉCOUTES*********/
-    
+        
     //Écoute de l'état du mute de SessionStorage
     if(mute == "false"){
         $("#volume").removeClass("bi-volume-mute")
@@ -425,7 +425,7 @@ $(document).ready(function(){
             clearCanvas();
         });
     };
-
+    
     function clearCanvas(){
         let hangman = document.getElementById("hangman")
         let context = hangman.getContext('2d')
