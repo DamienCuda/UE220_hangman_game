@@ -181,7 +181,7 @@ $(document).ready(function(){
 
         if(error == true){
             error_counter++
-            hangman_steps(error_counter, value)
+            hangman_steps(error_counter, value, mysteryWordArray)
 
             let score = parseInt(sessionStorage.getItem('score')) - 1;
             if(score <= 0){
@@ -233,7 +233,7 @@ $(document).ready(function(){
     };
 
     //fonction d'affichage du hangman en fonction du nombre d'erreur du joueur
-    function hangman_steps(error_counter, letterPressed){
+    function hangman_steps(error_counter, letterPressed, word){
         switch(error_counter){
             case 1:
                 hangman.gibbet();
@@ -318,7 +318,7 @@ $(document).ready(function(){
                     sessionStorage.setItem('score', score);
                     $("#player_score").html(score);
 
-                    lose();
+                    lose(word);
                 }, "300");
                 $('.letter').each(function(key, value){
                     if(value.textContent == letterPressed){
@@ -332,8 +332,10 @@ $(document).ready(function(){
         };
     };
 
-    // Affichage de la modale d'échec 
-    function lose(){
+    // Affichage de la modale d'échec (appelée dans hangman-steps si error-counter == 7)
+    function lose(word){
+
+        $('#show_lost_word').html(word); //on affiche le mot qui devait être trouvé
 
         // On affiche la modal de lose
         $("#modal-lose").css("display", "block");
