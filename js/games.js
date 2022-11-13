@@ -15,91 +15,134 @@ $(document).ready(function(){
     var loseSound = new Audio('./sound/lose.mp3');
     var winSound = new Audio('./sound/win.mp3');
     let mute = sessionStorage.getItem('sound'); //Récupération de l'état du son
+    let score = 0; //On définit par défaut le score à 0
+
 
     /***********INITIALISATION DU JEU*********/
 
     $("#current_difficulty").html(dificulty_level);     //Injection du niveau de difficulté
     $("#player_pseudo").html(player_pseudo);            //Injection du pseudo
-    $("#player_score").html(player_score);                     //Injection du score
+    $("#player_score").html(player_score);              //Injection du score
 
-    generate_keyboard();                                //Le clavier est généré
-                                                        //choix aléatoire du mot à injecter dans la variable mystery_word
+    generate_keyboard();                                //Le clavier virtuel est généré
+    generateWord()                                      //Le mot est choisi
 
-    var mystery_word = "test"; // Mot à découvrir
+    sessionStorage.setItem('score', score); //On stock le score dans le sessionStorage
+    $("#player_score").html(score); //On affiche le score à l'utilisateur
 
-    generateWord()
+    let mysteryWordArray = [];
+    let wordTemp = [];
+    //****VARIATION POUR LISIBILITÉ*******/
+    // A voir si possibilité d'extraire la fonction init()
+    // var mystery_word = generateWord();
+    //init(mystery_word);
 
-    /***********JEU EN COURS (peut-être joué au clavier physique et virtuel)*********/
 
+    /***********LES FONCTIONS*********/
+
+    //Fonction de génération du clavier virtuel
+    function generate_keyboard(){
+        for(var i = 65; i <= 90; i++){
+            var letter = String.fromCharCode(i);
+            $("#keyboard_container").append(`<span class="letter frederica_font">${letter}</span>`);
+        };
+    };
+
+    //Fonction de chois du mot
+    function generateWord(){
+        let json; //La variable json accueillera le coef en fonction du niveau choisi
+
+        switch(coef){
+            case "1.5":
+                json = "wordeasy.json";
+                break;
+            case "2":
+                json = "wordmedium.json";
+                break;
+            case "2.5":
+                json = "wordhard.json";
+                break;
+        }
+
+        $.ajax({
+            url: "./js/json/" + json,
+            type: "GET",
+            data: {},
+            dataType: "json",
+            success: function(reponse) {
+                let random;
+                for(let i = 0; i < reponse.length; i++){
+                    random = Math.floor(Math.random() * reponse.length)
+                }
+                init(reponse[random])
+                alert(reponse[random])
+            },
+            error: function(error){
+                console.log(error)
+            }
+        });
+    };
+
+    //fonction d'initialisation du jeu (appelée dans generateWord)
     function init(mystery_word){
 
         hidden_word(mystery_word);
 
-        if(mute == "false"){
-            $("#volume").removeClass("bi-volume-mute")
-            $("#volume").addClass("bi-volume-up")
-        }else{
-            $("#volume").addClass("bi-volume-mute")
-            $("#volume").removeClass("bi-volume-up")
-        }
-
-        //Écoute du clavier virtuel
-        var letters = $('.letter');
-
-        let mysteryWordArray = [];
-        let wordTemp = [];
-
         mysteryWordArray = mystery_word.toUpperCase().split('')
-
+        wordTemp = [];
         for(let i = 0; i < mysteryWordArray.length; i++){
             wordTemp.push("_");
         }
-
-        //Écoute du clavier virtuel
-        $(letters).each(function(key, value){
-            $(value).click(function(){
-                verif(value.textContent, mysteryWordArray, wordTemp);
-            })
-        });
-
-        //Écoute du clavier phisique
-        $(document).keydown(function(event){
-            if ((event.keyCode >= 65) && (event.keyCode <= 90)){ //Seul les lettres avec le keycode entre 65 et 90 sont ajoutées à la variable choosen_letter
-                choosen_letter = event.key.toUpperCase();
-                verif(choosen_letter, mysteryWordArray, wordTemp);
-            }
-        });
-
-        $("#volume").click(function(){
-            if($("#volume").hasClass("bi-volume-up")){
-                $("#volume").addClass("bi-volume-mute")
-                $("#volume").removeClass("bi-volume-up")
-                mute = "true";
-                sessionStorage.setItem('sound', mute);
-            }else{
-                $("#volume").addClass("bi-volume-up")
-                $("#volume").removeClass("bi-volume-mute")
-                mute = "false";
-                sessionStorage.setItem('sound', mute);
-            }
-        });
-
     }
 
-    // Fonction exit lors du click sur l'un des boutons exit
-    let exitBtn = $(".btn-exit")
-    $(exitBtn).each(function(key, value){
+    if(mute == "false"){
+        $("#volume").removeClass("bi-volume-mute")
+        $("#volume").addClass("bi-volume-up")
+    }else{
+        $("#volume").addClass("bi-volume-mute")
+        $("#volume").removeClass("bi-volume-up")
+    }
 
+    $("#volume").click(function(){
+        if($("#volume").hasClass("bi-volume-up")){
+            $("#volume").addClass("bi-volume-mute")
+            $("#volume").removeClass("bi-volume-up")
+            mute = "true";
+            sessionStorage.setItem('sound', mute);
+        }else{
+            $("#volume").addClass("bi-volume-up")
+            $("#volume").removeClass("bi-volume-mute")
+            mute = "false";
+            sessionStorage.setItem('sound', mute);
+        }
+    });
+
+    //Écoute du clavier virtuel
+    var letters = $('.letter');
+    //Écoute du clavier virtuel
+    $(letters).each(function(key, value){
         $(value).click(function(){
-            // On vide la sessionStorage
-            sessionStorage.clear();
-            // On reload la page pour refrech le jeu
-            window.location.href = "index.html";
+            verif(value.textContent, mysteryWordArray, wordTemp);
         })
     });
 
-    function verif(value, mysteryWordArray, wordTemp){
+    //Écoute du clavier phisique
+    $(document).keydown(function(event){
+        if ((event.keyCode >= 65) && (event.keyCode <= 90)){ //Seul les lettres avec le keycode entre 65 et 90 sont ajoutées à la variable choosen_letter
+            choosen_letter = event.key.toUpperCase();
+            verif(choosen_letter, mysteryWordArray, wordTemp);
+        }
+    });
 
+    //Fonction de génération du mot mystère caché (appelée dans init())
+    function hidden_word(word){
+        for (var i = 0 ; i < word.length; i++){
+            $("#mystery_word_container").append(`<span class="mystery_letters frederica_font">_</span>`)
+        }
+    };
+
+    //Fonction de vérification de la proposition de lettre du joueur (appelée sur les ecouteurs des claviers)
+    function verif(value, mysteryWordArray, wordTemp){
         let error = false;
         for(let i = 0; i < mysteryWordArray.length; i++){
             if(mysteryWordArray.includes(value)){
@@ -118,9 +161,7 @@ $(document).ready(function(){
             }
         }
 
-
         if(!wordTemp.includes("_")){
-
             setTimeout(() => {
                 if(mute === "false") {
                     //On joue l'audio de win
@@ -135,7 +176,6 @@ $(document).ready(function(){
             $("#player_score").html(score);
             win();
         }
-
 
         if(error == true){
             error_counter++
@@ -161,65 +201,9 @@ $(document).ready(function(){
                 tempWordSize++
             }
         })
-
-        /* Je ne sais pas à quoi servais exactement cette ligne damien donc je l'ai commenté au cas ou c'était important */
-        //choosen_letter = value.innerHTML;
-    }
-    
-    /***********LES FONCTIONS*********/
-
-    //Fonction de génération du mot mystère caché
-    function hidden_word(word){
-        for (var i = 0 ; i < word.length; i++){
-            $("#mystery_word_container").append(`<span class="mystery_letters frederica_font">_</span>`)
-        }
-    };
-    //Fonction de génération du clavier virtuel
-    function generate_keyboard(){
-        for(var i = 65; i <= 90; i++){
-           var letter = String.fromCharCode(i);
-           $("#keyboard_container").append(`<span class="letter frederica_font">${letter}</span>`);
-        };
     };
 
-    function generateWord(){
-
-        let json;
-
-        switch(coef){
-            case "1.5":
-                json = "wordeasy.json";
-                break;
-            case "2":
-                json = "wordmedium.json";
-                break;
-            case "2.5":
-                json = "wordhard.json";
-                break;
-        }
-
-        $.ajax({
-            url: "./js/json/" + json,
-            type: "GET",
-            data: {},
-            dataType: "json",
-            success: function(reponse) {
-                let random;
-                for(let i = 0; i < reponse.length; i++){
-                    random = Math.floor(Math.random() * reponse.length)
-                }
-                init(reponse[random])
-            },
-            error: function(error){
-                console.log(error)
-            }
-        });
-
-
-
-    }
-
-    //Fonction d'affichage de la lettre si bonne pioche
+    //Fonction d'affichage de la lettre si bonne pioche (appellée dans verif())
     function show_letters(index, letter){ //Prend 2 paramètres l'index de la lettre dans le mot et la lettre
         var mystery_letters = $('.mystery_letters');
         $(mystery_letters).each((key, value) =>{
@@ -246,42 +230,7 @@ $(document).ready(function(){
         })
     };
 
-    function lose(){
-
-        // On affiche la modal de lose
-        $("#modal-lose").css("display", "block");
-        $("#modal-lose").addClass("in")
-
-        let restartBtn = document.getElementsByClassName("btn-restart")[0]
-        restartBtn.addEventListener("click", function(){
-
-            // On cache la modal lose
-            $("#modal-lose").css("display", "none");
-            $("#modal-lose").removeClass("in")
-
-            // On reload la page pour refrech le jeu
-            location.reload();
-        });
-    }
-
-    function win(){
-        // On affiche la modal de win
-        $("#modal-win").css("display", "block");
-        $("#modal-win").addClass("in")
-
-        let restartBtn = document.getElementsByClassName("btn-restart")[1]
-        restartBtn.addEventListener("click", function(){
-
-            // On cache la modal lose
-            $("#modal-win").css("display", "none");
-            $("#modal-win").removeClass("in")
-
-            // On reload la page pour refrech le jeu
-            location.reload();
-        });
-    }
-
-    //fonction d'affichage du hangman en fonction du nombre d'erruer du joueur
+    //fonction d'affichage du hangman en fonction du nombre d'erreur du joueur
     function hangman_steps(error_counter, letterPressed){
         switch(error_counter){
             case 1:
@@ -381,4 +330,81 @@ $(document).ready(function(){
         };
     };
 
+    // Affichage de la modale d'échec
+    function lose(){
+
+        // On affiche la modal de lose
+        $("#modal-lose").css("display", "block");
+        $("#modal-lose").addClass("in")
+
+        let restartBtn = document.getElementsByClassName("btn-restart")[0]
+        restartBtn.addEventListener("click", function(){
+
+            // On cache la modal lose
+            $("#modal-lose").css("display", "none");
+            $("#modal-lose").removeClass("in")
+
+            // On vide le mot
+            let container = document.getElementById("mystery_word_container")
+
+            while(container.firstChild){
+                container.removeChild(container.firstChild)
+            }
+
+            // On nettoie le canvas
+            clearCanvas();
+        });
+    }
+
+    //Affichage de la modale de réussite
+    function win(){
+        // On affiche la modal de win
+        $("#modal-win").css("display", "block");
+        $("#modal-win").addClass("in")
+
+        let restartBtn = document.getElementsByClassName("btn-restart")[1]
+        restartBtn.addEventListener("click", function(){
+
+            // On cache la modal lose
+            $("#modal-win").css("display", "none");
+            $("#modal-win").removeClass("in")
+
+            // On vide le mot
+            let container = document.getElementById("mystery_word_container")
+
+            while(container.firstChild){
+                container.removeChild(container.firstChild)
+            }
+            // On nettoie le canvas
+            clearCanvas();
+        });
+    }
+
+    // Écoute des boutons "EXIT"
+    let exitBtn = $(".btn-exit")
+    $(exitBtn).each(function(key, value){
+
+        $(value).click(function(){
+            // On vide la sessionStorage
+            sessionStorage.clear();
+            // On reload la page pour refrech le jeu
+            window.location.href = "index.html";
+        })
+    });
+
+    function clearCanvas(){
+        let hangman = document.getElementById("hangman")
+        let context = hangman.getContext('2d')
+        context.clearRect(0, 0, 300, 400);
+    }
+
+    // Écoute des boutons "EXIT"
+    let restartBtn = $(".btn-restart")
+    $(restartBtn).each(function(key, value){
+
+        $(value).click(function(){
+            // On génère un nouveau mot
+            generateWord()
+        })
+    });
 });
