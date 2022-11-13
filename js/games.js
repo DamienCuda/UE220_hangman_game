@@ -39,6 +39,8 @@ $(document).ready(function(){
         });
     
     /***********LES ÉCOUTES*********/
+    
+    //Écoute de l'état du mute de SessionStorage
     if(mute == "false"){
         $("#volume").removeClass("bi-volume-mute")
         $("#volume").addClass("bi-volume-up")
@@ -118,7 +120,7 @@ $(document).ready(function(){
         };
     };
 
-    //Fonction de chois du mot
+    //Fonction de choix du mot
     function generateWord(){
         return new Promise((resolve, reject) => {
 
