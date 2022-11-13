@@ -28,7 +28,6 @@ $(document).ready(function(){
             let pseudo = escape($(pseudo_input).val());
             if(regex.test(pseudo)){
                 sessionStorage.setItem('pseudo',pseudo ); //récupération du pseudo
-                sessionStorage.setItem('score', 0); //initialisation du score
                 sessionStorage.setItem('sound', false); //On active par défaut le son
                 
                 $.each( dificulty_level, function( key, value ) {
