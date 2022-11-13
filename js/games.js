@@ -24,14 +24,13 @@ $(document).ready(function(){
     $("#player_score").html(player_score);              //Injection du score
 
     generate_keyboard();                                //Le clavier virtuel est généré
-    generateWord()                                      //Le mot est choisi
-   
-   
-   
-    //****VARIATION POUR LISIBILITÉ*******/
-    // A voir si possibilité d'extraire la fonction init()
-    // var mystery_word = generateWord();
-    //init(mystery_word);
+
+    var mystery_word = generateWord();                  //Le mot mystère est généré et passé à la variable sous forme de promesses
+
+    mystery_word
+        .then(value => {                        
+            init(value);                                //Le résultat de la promesse sert à initialiser le jeu
+        });
 
 
     /***********LES FONCTIONS*********/
@@ -46,6 +45,7 @@ $(document).ready(function(){
 
     //Fonction de chois du mot 
     function generateWord(){
+        return new Promise((resolve, reject) => {
 
         let json; //La variable json accueillera le coef en fonction du niveau choisi 
 
@@ -60,7 +60,6 @@ $(document).ready(function(){
                 json = "wordhard.json";
                 break;
         }
-
         $.ajax({
             url: "./js/json/" + json,
             type: "GET",
@@ -71,15 +70,18 @@ $(document).ready(function(){
                 for(let i = 0; i < reponse.length; i++){
                     random = Math.floor(Math.random() * reponse.length)
                 }
-                init(reponse[random])
+                mystery_word = reponse[random];
+                resolve(mystery_word);
             },
             error: function(error){
-                console.log(error)
+                reject(alert("Le mot n'a pu être généré"));
             }
         });
+            
+        })
     };
 
-    //fonction d'initialisation du jeu (appelée dans generateWord)
+    //fonction d'initialisation du jeu
     function init(mystery_word){
 
         hidden_word(mystery_word);
@@ -95,12 +97,12 @@ $(document).ready(function(){
         //Écoute du clavier virtuel
         var letters = $('.letter');
 
-        let mysteryWordArray = [];
+        let mysteryWordArray = [];                              //Servira à accueillir le mot mytère
         let wordTemp = [];
 
-        mysteryWordArray = mystery_word.toUpperCase().split('')
+        mysteryWordArray = mystery_word.toUpperCase().split('') //Le mot mystère est transformé en array
 
-        for(let i = 0; i < mysteryWordArray.length; i++){
+        for(let i = 0; i < mysteryWordArray.length; i++){       //Un array temporaire de la même longueur que le mot mystère est généré
             wordTemp.push("_");
         }
 
@@ -133,7 +135,7 @@ $(document).ready(function(){
             }
         });
 
-    }
+    };
 
     //Fonction de génération du mot mystère caché (appelée dans init())
     function hidden_word(word){
@@ -143,23 +145,22 @@ $(document).ready(function(){
     };
 
     //Fonction de vérification de la proposition de lettre du joueur (appelée sur les ecouteurs des claviers)
-    function verif(value, mysteryWordArray, wordTemp){
+    function verif(value, mysteryWordArray, wordTemp){              //Les paramètres correspondent à une lettre choisie, le mot mystère sous forme d'array et son double temporaire empli de _
 
-        let error = false;
-        for(let i = 0; i < mysteryWordArray.length; i++){
-            if(mysteryWordArray.includes(value)){
-                if(mysteryWordArray[i].indexOf(value) !== -1){
+        let error = false;                                          //Varibale d'erreur initialisé
+        for(let i = 0; i < mysteryWordArray.length; i++){  
+            if(mysteryWordArray.includes(value)){                   // On vérifie si la lettre est dans l'array mystère
+                if(mysteryWordArray[i].indexOf(value) !== -1){      
                     if(wordTemp[i] != value){
                         wordTemp[i] = value
-                        show_letters(i, value);
-                        if(mute === "false"){
-                            //On joue l'audio de success
-                            successSound.play();
+                        show_letters(i, value);                     // On récupère l'index pour le passer à la fonction d'affichage des lettres
+                        if(mute === "false"){                       //Si le son n'est pas coupé par le joueur 
+                            successSound.play();                    //Audio de win
                         }
                     }
                 }
             }else{
-                error = true;
+                error = true;                                       //Si la lettre n'est pas dans l'array mystère la variable est modifié
             }
         }
 
@@ -179,11 +180,11 @@ $(document).ready(function(){
             win();
         }
 
-        if(error == true){
-            error_counter++
-            hangman_steps(error_counter, value, mysteryWordArray)
+        if(error == true){                                              //Si la variable a été modifiée
+            error_counter++;                                            //Le compteur d'erreur est incrémenté  
+            hangman_steps(error_counter, value, mysteryWordArray);      //La fonction d'affichage du pendu est lancé
 
-            let score = parseInt(sessionStorage.getItem('score')) - 1;
+            let score = parseInt(sessionStorage.getItem('score')) - 1;  //Le score est updaté
             if(score <= 0){
                 score = 0
             }
@@ -232,7 +233,7 @@ $(document).ready(function(){
         })
     };
 
-    //fonction d'affichage du hangman en fonction du nombre d'erreur du joueur
+    //fonction d'affichage du hangman en fonction du nombre d'erreur du joueur (appellée dans verif())
     function hangman_steps(error_counter, letterPressed, word){
         switch(error_counter){
             case 1:
@@ -351,9 +352,9 @@ $(document).ready(function(){
             // On reload la page pour refrech le jeu
             location.reload();
         });
-    }
+    };
 
-    //Affichage de la modale de réussite
+    //Affichage de la modale de réussite (appellée dans verif())
     function win(){
         // On affiche la modal de win
         $("#modal-win").css("display", "block");
@@ -369,7 +370,7 @@ $(document).ready(function(){
             // On reload la page pour refrech le jeu
             location.reload();
         });
-    }
+    };
 
     // Écoute des boutons "EXIT"
     let exitBtn = $(".btn-exit")

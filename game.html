@@ -63,13 +63,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title " id="lose-title">Perdu ! 😭</h5>
+                                <h5 class="modal-title" id="lose-title">Perdu ! 😭</h5>
                             </div>
                             <div class="modal-body text-center">
                                 <p>Dommage... Peut-être la prochaine fois ?</p>
                                 <p>Le mot à trouver était</p>
                                 <p id="show_lost_word" class="h3">Bananes</p>
-                                <p>Vous avez perdu <span id="lost_points"></span> points</p>
+                                <p>Vous avez perdu <span id="lost_points">X</span> points</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary btn-restart">Re-start</button>
@@ -84,10 +84,11 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="win-title">gagné ! 🏆</h5>
+                                <h5 class="modal-title" id="win-title">Gagné ! 🏆</h5>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body text-center">
                                 <p>🎉 Bravo ! On continue ? 🎉</p>
+                                <p>Vous avez gagné <span id="won_points">X</span> points</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary btn-restart">Continuer</button>
