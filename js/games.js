@@ -186,7 +186,7 @@ $(document).ready(function(){
             hangman_steps(error_counter, value, mysteryWordArray);      //La fonction d'affichage du pendu est lancé
 
             score--;  //Le score est updaté
-            scoreError = score; //Le nombre de point perdu est stocké
+            scoreError++; //Le nombre de point perdu est stocké
             currentScore--
 
             if(score <= 0){
@@ -315,7 +315,7 @@ $(document).ready(function(){
                     }
 
                     score = score - 5 - error_counter * coef;
-                    scoreError = score
+                    scoreError = scoreError + 5 + error_counter * coef;
 
                     currentScore = currentScore - 5 - error_counter * coef;
                     if(score <= 0){
@@ -347,7 +347,7 @@ $(document).ready(function(){
         $("#modal-lose").addClass("in")
 
         let losePointZone = document.getElementById("lost_points")
-        losePointZone.innerHTML = maxScore - scoreError
+        losePointZone.innerHTML = scoreError
 
         let restartBtn = document.getElementsByClassName("btn-restart")[0]
         restartBtn.addEventListener("click", function(){
@@ -419,6 +419,7 @@ $(document).ready(function(){
         $(value).click(function(){
             error_counter = 0;
             currentScore = 0;
+            scoreError = 0;
             // On génère un nouveau mot
             mystery_word = generateWord();                  //Le mot mystère est généré et passé à la variable sous forme de promesses
 
