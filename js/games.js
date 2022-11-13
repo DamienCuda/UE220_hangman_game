@@ -398,7 +398,7 @@ $(document).ready(function(){
         context.clearRect(0, 0, 300, 400);
     }
 
-    // Écoute des boutons "EXIT"
+    // Écoute des boutons "RESTART"
     let restartBtn = $(".btn-restart")
     $(restartBtn).each(function(key, value){
 
