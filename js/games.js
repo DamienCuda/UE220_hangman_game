@@ -51,8 +51,6 @@ $(document).ready(function(){
 
     //Écoute du clavier virtuel
     var letters = $('.letter');
-
-    //Écoute du clavier virtuel
     $(letters).each(function(key, value){
         $(value).click(function(){
             verif(value.textContent, mysteryWordArray, wordTemp);
