@@ -81,7 +81,7 @@ $(document).ready(function(){
         })
     };
 
-    //fonction d'initialisation du jeu (appelée dans generateWord)
+    //fonction d'initialisation du jeu
     function init(mystery_word){
 
         hidden_word(mystery_word);
@@ -233,7 +233,7 @@ $(document).ready(function(){
         })
     };
 
-    //fonction d'affichage du hangman en fonction du nombre d'erreur du joueur
+    //fonction d'affichage du hangman en fonction du nombre d'erreur du joueur (appellée dans verif())
     function hangman_steps(error_counter, letterPressed, word){
         switch(error_counter){
             case 1:
@@ -354,7 +354,7 @@ $(document).ready(function(){
         });
     };
 
-    //Affichage de la modale de réussite
+    //Affichage de la modale de réussite (appellée dans verif())
     function win(){
         // On affiche la modal de win
         $("#modal-win").css("display", "block");
