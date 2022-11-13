@@ -23,31 +23,37 @@
         <main id= "main_wrapper" class="row">
             <aside id="score_container" class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 pt-4">
                 <div id="current_game_infos" class="d-flex flex-lg-column flex-md-row flex-xl-column flex-sm-row flex-row justify-content-center justify-content-sm-center justify-content-xl-start justify-content-md-center justify-content-lg-start text-xl-start text-md-center text-lg-start text-sm-center text-center align-items-md-center align-items-lg-start align-items-xl-start align-sm-items-center align-items-center">
-                    <div class="mb-1 col-3 col-md-3 col-lg-12 col-sm-3 col-xl-12">
-                        <h5 class="h5 frederica_font">Paramètre :</h5>
+                    <div class="mb-2 col-3 col-md-3 col-lg-12 col-sm-3 col-xl-12">
+                        <h5 class="h5 frederica_font">Paramètres :</h5>
                         <div id="icon-parametre" class="justify-content-center justify-content-md-center justify-content-lg-start justify-content-sm-center justify-content-xl-start">
                             <i class='bx bx-log-out btn-exit' title="Exit" id="exit"></i>
                             <span class="bi bi-volume-up" id="volume"></span>
                         </div>
                     </div>
                     <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
-                        <h5 class="h5 frederica_font">Score :</h5>
-                        <p id="player_score"></p>
-                    </div>
-                    <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
                         <h5 class="h5 frederica_font">Joueur :</h5>
                         <p id="player_pseudo"></p>
+                    </div>
+                    <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
+                        <h5 class="h5 frederica_font">Score :</h5>
+                        <p id="player_score"></p>
                     </div>
                     <div class="mb-1 col-3 col-sm-3 col-md-3 col-lg-12 col-xl-12">
                         <h5 class="h5 frederica_font">Niveau de difficulté :</h5>
                         <p id="current_difficulty"></p>
                     </div>
                 </div>
-                <div id="game_rules">
-                    <h5 class="h5 frederica_font">Règles du jeu</h5>
-                    <p>Le but du jeu est simple :<br> deviner toutes les lettres qui doivent composer un mot,
-                        éventuellement avec un nombre limité de tentatives et des thèmes fixés à l’avance.
-                        A chaque fois que le joueur devine une lettre, celle-ci est affichée. Dans le cas contraire, le dessin d’un pendu se met à apparaître.</p>
+                <div id="game_rules text-left">
+                    <h5 class="h5 frederica_font">Système de score</h5>
+                    <p>
+                        <strong>C'est gagné !<br></strong>
+                        Vous marquez 5 points plus 1 point par section de pendu non apparue<br><br>
+                        <strong>C'est perdu !<br></strong>
+                        Vous perdez 5 points plus 1 point par section de pendu apparue<br><br>
+
+                        N.B : Un coefficient est appliqué au points supplémentaires en fonction du niveau de jeu. Plus c'est dur plus vous gagnez (ou perdez) !
+
+                    </p>
                 </div>
             </aside>
             <section id="game_container" class="col-12 col-sm-12 col-xl-10 col-md-12 col-lg-10 pb-4 justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-start justify-content-xl-start  text-md-center text-sm-center text-lg-start text-xl-start text-center align-items-md-center align-items-sm-center align-items-xl-start align-items-lg-start align-items-center">
@@ -59,8 +65,11 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="lose-title">Perdu ! 😭</h5>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body text-center">
                                 <p>Dommage... Peut-être la prochaine fois ?</p>
+                                <p>Le mot à trouver était</p>
+                                <p id="show_lost_word" class="h3"></p>
+                                <p>Vous avez perdu <span id="lost_points"></span> points</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary btn-restart">Re-start</button>
@@ -75,10 +84,11 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="win-title">gagné ! 🏆</h5>
+                                <h5 class="modal-title" id="win-title">Gagné ! 🏆</h5>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body text-center">
                                 <p>🎉 Bravo ! On continue ? 🎉</p>
+                                <p>Vous avez gagné <span id="won_points">X</span> points</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary btn-restart">Continuer</button>
