@@ -147,6 +147,7 @@ $(document).ready(function(){
                     }
                     mystery_word = reponse[random];
                     resolve(mystery_word);
+                    console.log(mystery_word)
                 },
                 error: function(error){
                     reject(alert("Le mot n'a pu être généré"));
@@ -182,7 +183,7 @@ $(document).ready(function(){
         for(let i = 0; i < mysteryWordArray.length; i++){
             if(mysteryWordArray.includes(value)){                   // On vérifie si la lettre est dans l'array mystère
                 if(mysteryWordArray[i].indexOf(value) !== -1){
-                    if(wordTemp[i] != value){
+                    if(wordTemp[i] !== value){
                         wordTemp[i] = value
                         show_letters(i, value);                     // On récupère l'index pour le passer à la fonction d'affichage des lettres
                         if(mute === "false"){                       //Si le son n'est pas coupé par le joueur

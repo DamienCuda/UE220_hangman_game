@@ -20,7 +20,7 @@ $(document).ready(function(){
 
     //Fonction de vérification du pseudo et verification du niveau de difficulté
     function start_game(e){
-        if ($(pseudo_input).val() == ""){
+        if ($(pseudo_input).val() === ""){
             e.preventDefault();
             $(error_message).html('Vous devez entrer votre pseudo pour jouer ⛔') //Affichage message d'erreur si pas de pseudo choisit
         }else{
